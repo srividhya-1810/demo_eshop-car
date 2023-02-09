@@ -9,38 +9,38 @@
       <% end %>
     </div>
 
-  <p>
-	<%= f.label :name %>
-	<%= f.text_field :name %>
-  </p>
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
 
-  <p>
-	<%= f.label :email %>
-	<%= f.email_field :email %>
-  </p>
+  <div class="form-group">
+    <%= f.label :email %>
+    <%= f.email_field :email %>
+  </div>
 
-  <p>
-	<%= f.label :password %>
-	<%= f.password_field :password %>
-  </p>
+  <div class="form-group">
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+  </div>
 
-  <p>
-	<%= f.label :address %>
-	<%= f.text_area :address %>
-  </p>
+  <div class="form-group">
+    <%= f.label :address %>
+    <%= f.text_area :address %>
+  </div>
 
-  <p>
-	<%= f.label :phone_number%>
-	<%= f.text_field :phone_number %>
-  </p>
+  <div class="form-group">
+    <%= f.label :phone_number%>
+    <%= f.text_field :phone_number %>
+  </div>
 
 
-  <p>
-  <%= f.label :user_type %>
-  <%= select_tag :user_type, options_for_select([['Seller', 1], ['Buyer', 2]]) %>  </p>
-  </p>
+  <div class="form-group">
+    <%= f.label :user_type %>
+    <%= select_tag :user_type, options_for_select([['Seller', 1], ['Buyer', 2]]) %>  </div>
+  </div>
 
-  <p>
+  <div>
 	<%= f.submit "Sign Up"%>
-  </p>
+  </div>
 <% end %>

@@ -1,2 +1,7 @@
-<h1>SIGNED UP</h1>
-<%= flash[:notice] %>
+<div>
+    <h1>SIGNED UP</h1>
+    <%= flash[:notice] %>
+    <% if @user %>
+        LOggend in as <%= @user.email %>
+    <% end %>
+</div>
