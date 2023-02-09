@@ -1,0 +1,19 @@
+<h1> LOG IN</h1>
+
+<%= flash[:alert] %>
+<%= form_with(scope: :session,url: login_path) do |f| %>
+
+ <div class="form-group">
+    <%= f.label :email %>
+    <%= f.email_field :email %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+  </div>
+
+  <div>
+	<%= f.submit "Sign in"%>
+  </div>
+<% end %>

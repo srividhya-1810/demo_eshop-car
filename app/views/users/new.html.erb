@@ -4,10 +4,11 @@
 
   <% if @user.errors.any?  %>
     <div>
-      < @user.errors.full_messages.each do |messages| %>
+      <% @user.errors.full_messages.each do |messages| %>
         <div> <%= messages %> </div>
       <% end %>
     </div>
+  <% end %>
 
   <div class="form-group">
     <%= f.label :name %>
