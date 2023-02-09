@@ -5,11 +5,14 @@ Rails.application.routes.draw do
   # root "articles#index"
   get 'signup', to: "users#new"
   post 'signedup', to: "users#create"
-  get 'index', to: 'users#index'
+  root  to: 'users#index'
 
 
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'
-  delete 'logout', to: 'sessions#destroy'
+  get 'logout', to: 'sessions#destroy'
+
+  get 'cars', to: 'cars#index'
+ 
   
 end

@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
     def create
-         @user=User.new(params.permit(:name, :email,  :address , :phone_number, :user_type, :password))
+         @user=User.new(params.permit(:name, :email,  :address , :phone_number, :user_type, :password))  #add validation
          if @user.save 
             session[:user_id]=@user.id        
             redirect_to login_path, notice: "Successfully CReated ACcount "
