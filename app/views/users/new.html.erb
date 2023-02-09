@@ -1,5 +1,14 @@
 <h1>Sign up</h1>
-<%= form_with(user: @user, local: true) do |f| %>
+<%= flash[:notice] %>
+<%= form_with(user: @user,url: signedup_path) do |f| %>
+
+  <% if @user.errors.any?  %>
+    <div>
+      < @user.errors.full_messages.each do |messages| %>
+        <div> <%= messages %> </div>
+      <% end %>
+    </div>
+
   <p>
 	<%= f.label :name %>
 	<%= f.text_field :name %>
@@ -17,7 +26,7 @@
 
   <p>
 	<%= f.label :address %>
-	<%= f.text_area :email %>
+	<%= f.text_area :address %>
   </p>
 
   <p>
@@ -25,12 +34,13 @@
 	<%= f.text_field :phone_number %>
   </p>
 
+
   <p>
   <%= f.label :user_type %>
-  <%= f.select :user_type, ['seller', 'buyer']%>
+  <%= select_tag :user_type, options_for_select([['Seller', 1], ['Buyer', 2]]) %>  </p>
   </p>
 
   <p>
-	<%= f.submit "Create Account"%>
+	<%= f.submit "Sign Up"%>
   </p>
 <% end %>
