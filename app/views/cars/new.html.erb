@@ -13,8 +13,9 @@
 
   <div>
     <%= f.label :car_type %>
-    <%= select_tag :car_type, options_for_select([['SUV', 0], ['HATCHBACK', 1],['CROSSOVER', 2], ['CONVERTIBLE', 3], ['SEDAN', 4], ['SPORTS', 5], ['COUPE', 6], ['MINIVAN', 7], ['WAGON', 8], ['PICK UP TRUCK', 9]]) %>  
+    <%= select_tag :car_type, options_for_select([['SUV', 0], ['HATCHBACK', 1],['CROSSOVER', 2], ['CONVERTIBLE', 3], ['SEDAN', 4], ['SPORTS', 5], ['COUPE', 6], ['MINIVAN', 7], ['WAGON', 8], ['PICK UP TRUCK', 9]])  %>  
   </div>
+
   <div>
     <%= f.label :fuel_type %>
     <%= select_tag :fuel_type, options_for_select([['Petrol', 0], ['diesel', 1], ['Ethanol', 2], ['Electric Battery', 3], ['Hydrogen', 4]]) %>  
@@ -39,7 +40,7 @@
   </div>
 
   <div>
-    <%= f.submit "Add"%>
+    <%= f.submit "Add" %>
   </div>
   
 <% end %>
