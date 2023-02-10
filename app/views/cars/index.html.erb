@@ -1,6 +1,6 @@
 <h1>Car Home Page</h1>
 
-<%= link_to 'logout', logout_path, medivod: :delete %>
+<%= link_to 'logout', logout_path, method: :delete %>
 <% if logged_in? %>
 <h2>Welcome  <%= current_user.name %> </h2>
 <% else %>
@@ -17,6 +17,9 @@
         <div>Condition: <%=  car.condition %> </div>
         <div>Color:<%=  car.color %> </div>
         <div>Status:  <%=  car.status %> </div>
+        <% car.images_as_thumbnails.each do |img| %>
+            <%= link_to image_tag(img), img %>
+        <% end %>
 
             <br/><br/><br/>
 

@@ -1,0 +1,11 @@
+<% byebug %>
+<% if error_objects.any? %>
+  <h2>Following errors prevented from creating </h2>
+  <ul>
+  <%= "hi" %>
+  <% error_objects.full_messages.each do |msg| %>
+     <li> <%= msg %> </li>
+
+  <% end %>
+  </ul>
+<% end %>

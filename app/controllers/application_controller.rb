@@ -17,4 +17,10 @@ class ApplicationController < ActionController::Base
         end
     end
 
+    def no_need_to_login
+        if current_user.present?
+            redirect_to cars_path
+        end
+    end
+
 end

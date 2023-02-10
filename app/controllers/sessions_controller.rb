@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+    before_action :no_need_to_login, only: [:new]
+
     def new
     end
 
@@ -9,7 +11,7 @@ class SessionsController < ApplicationController
             redirect_to cars_path
         else
             flash.now[:alert]="THere is something wrong"
-            render 'new'
+            render 'new', status: 302
         end
 
 

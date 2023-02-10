@@ -1,4 +1,4 @@
-<h1>UPLOAD NEW CAR TO SELL</h1>
+<h1>EDIT ARTICLE</h1>
 <% if @car.errors.any? %>
   <h2>Following errors prevented from creating </h2>
   <ul>
@@ -11,7 +11,7 @@
 
 
 
-<%= form_with car: @car, url: cars_path, local: true do |f| %>
+<%= form_with(model: @car, local: true) do |f| %>
   <div>
     <%= f.label :brand %>
     <%= f.text_field :brand %>
@@ -55,7 +55,7 @@
     <%= f.file_field :images, multiple: true %>
 
   <div>
-    <%= f.submit "Add" %>
+    <%= f.submit "update" %>
   </div>
   
 <% end %>
