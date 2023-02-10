@@ -1,7 +1,28 @@
-<h1>LOoged in </h1>
+<h1>Car Home Page</h1>
 
-<%= link_to 'logout', logout_path, method: :delete %>
+<%= link_to 'logout', logout_path, medivod: :delete %>
 <% if logged_in? %>
 <h2>Welcome  <%= current_user.name %> </h2>
 <% else %>
 <% end %>
+
+
+<div>
+    <% @cars.each do |car| %>
+        <div>Brand: <%= car.brand %> </div> 
+
+        <div>Price: <%=  car.price %> </div>
+        <div>Cart Type: <%=  car.car_type %> </div>
+        <div>Fuel Type: <%=  car.fuel_type %> </div>
+        <div>Condition: <%=  car.condition %> </div>
+        <div>Color:<%=  car.color %> </div>
+        <div>Status:  <%=  car.status %> </div>
+
+            <br/><br/><br/>
+
+    <% end %> <br/>
+</div>
+
+
+
+
