@@ -23,7 +23,7 @@ class CarsController < ApplicationController
         
        
         
-        @car.user_id= User.first  #check here
+        @car.user_id= current_user.id  #check here
         if @car.save
             flash[:notice]="Car uploaded"
             redirect_to cars_path
@@ -41,5 +41,16 @@ class CarsController < ApplicationController
         else
             render 'edit', status: 302
         end
+    end
+    def add_to_order
+        
+        @order=Order.new
+        @order.user_id=current_user.id
+        @order.car_id=params[:format]
+        @car_data=Car.find( @order.car_id)
+        @car_data.status=1
+        @car_data.save  
+        @order.save
+        redirect_to cars_path
     end
 end

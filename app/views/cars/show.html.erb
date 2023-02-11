@@ -9,5 +9,6 @@
         <% @car.images_as_thumbnails.each do |img| %>
             <%= link_to image_tag(img), img %>
         <% end %>
+        <div> <%= link_to 'check out', checkout_path(@car) %>
     
         

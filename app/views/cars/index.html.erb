@@ -13,15 +13,70 @@
         <div>Brand: <%= car.brand %> </div> 
 
         <div>Price: <%=  car.price %> </div>
-        <div>Cart Type: <%=  car.car_type %> </div>
-        <div>Fuel Type: <%=  car.fuel_type %> </div>
-        <div>Condition: <%=  car.condition %> </div>
+        <div>Cart Type: 
+            <% if car.car_type==0 %>
+                Suv
+            <% elsif car.car_type==1 %>
+                Hatchback
+            <% elsif car.car_type==2 %>
+                Crossover
+            <% elsif car.car_type==3 %>
+                Covertible 
+            <% elsif car.car_type==4 %>
+                Sedan
+            <% elsif car.car_type==5 %>
+                Sports 
+            <% elsif car.car_type==6 %>
+                Coupe
+            <% elsif car.car_type==7 %>
+                Minivan
+            <% elsif car.car_type==8 %>
+                Wagon
+            <% else %>
+                Pick Up Truck
+            <% end %>
+        </div>
+
+        <div>Fuel Type: 
+            <% if car.fuel_type==0 %>
+                Petrol
+            <% elsif car.fuel_type==1 %>
+                Diesel 
+            <% elsif car.fuel_type==2 %>
+                Ethanol
+            <% elsif car.fuel_type==3 %>
+                Electric Battery
+            <% else %>
+                Hydrogen
+            <% end %> 
+        </div>
+
+        <div>Condition: 
+            <% if car.condition==0 %>
+                New
+            <% else %>
+                2nd Hand
+            <% end %>
+        </div>
+
         <div>Color:<%=  car.color %> </div>
-        <div>Status:  <%=  car.status %> </div>
+        <div>Status:  
+            <% if car.status==0 %>
+                Available
+            <% else %>
+                Sold
+            <% end %>
+        
+        </div>
         <% car.images_as_thumbnails.each do |img| %>
             <%= link_to image_tag(img), img %>
         <% end %>
-        <div> <%=link_to 'edit',edit_car_path(car) %>      <%=link_to 'buy', car_path(car) %> </div>
+        <div> <%=link_to 'edit',edit_car_path(car) %> 
+
+            <% if car.status==0 %>
+             <%=link_to 'buy', car_path(car) %> 
+             <% end %>
+             </div>
 
             <br/><br/><br/>
 
