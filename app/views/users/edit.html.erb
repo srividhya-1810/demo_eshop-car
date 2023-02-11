@@ -1,0 +1,47 @@
+<h1>Edityour profile </h1>
+<%= flash[:notice] %>
+<%= form_with(model: @user,local: true) do |f| %>
+
+  <% if @user.errors.any?  %>
+    <div>
+      <% @user.errors.full_messages.each do |messages| %>
+        <div> <%= messages %> </div>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :email %>
+    <%= f.email_field :email %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :address %>
+    <%= f.text_area :address %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :phone_number%>
+    <%= f.text_field :phone_number %>
+  </div>
+
+
+  <div class="form-group">
+    <%= f.label :user_type %>
+    <%= select_tag :user_type, options_for_select([['Seller', 1], ['Buyer', 2]]) %>  
+  </div>
+
+  <div>
+	<%= f.submit "Update"%>
+  </div>
+<% end %>

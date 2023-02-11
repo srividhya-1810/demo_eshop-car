@@ -6,7 +6,8 @@
 <% else %>
 <% end %>
 
-
+<div> <%= link_to 'Add New Car', new_car_path %> </div>
+<br/><br/><br/>
 <div>
     <% @cars.each do |car| %>
         <div>Brand: <%= car.brand %> </div> 
@@ -20,6 +21,7 @@
         <% car.images_as_thumbnails.each do |img| %>
             <%= link_to image_tag(img), img %>
         <% end %>
+        <div> <%=link_to 'edit',edit_car_path(car) %> </div>
 
             <br/><br/><br/>
 

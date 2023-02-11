@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+    
     def create
          @user=User.new(params.permit(:name, :email,  :address , :phone_number, :user_type, :password))  #add validation
          if @user.save 
@@ -21,4 +22,28 @@ class UsersController < ApplicationController
     def new
         @user = User.new
     end
+
+
+    def edit
+        @user=User.find(params[:id])
+    end
+
+    def update
+        @user=User.find(params[:id])
+        if @user.update(user_params)
+            flash[:notice]="Your account details was successfully updated"
+            redirect_to cars_path
+        else
+            render 'edit', status: 302
+        end
+
+
+    end
+
+    private
+    def user_params
+        params.require(:user).permit(:name, :email,  :address , :phone_number, :user_type, :password)
+                                 
+    end
+
 end

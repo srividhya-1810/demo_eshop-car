@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   get 'logout', to: 'sessions#destroy'
 
   get 'cars', to: 'cars#index'
-
+  resources :users, only: [:edit, :update]
   resources :cars, only: [:show, :index, :new, :create, :edit, :update]
  
   
