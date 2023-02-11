@@ -1,2 +1,13 @@
 <h1>Buy Page</h1>
 <p> Brand: <%= @car.brand %> </p>
+<div>Price: <%=  @car.price %> </div>
+        <div>Cart Type: <%= @car.car_type %> </div>
+        <div>Fuel Type: <%=  @car.fuel_type %> </div>
+        <div>Condition: <%=  @car.condition %> </div>
+        <div>Color:<%=  @car.color %> </div>
+        <div>Status:  <%=  @car.status %> </div>
+        <% @car.images_as_thumbnails.each do |img| %>
+            <%= link_to image_tag(img), img %>
+        <% end %>
+    
+        

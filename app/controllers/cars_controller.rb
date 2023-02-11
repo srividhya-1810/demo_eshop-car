@@ -19,11 +19,11 @@ class CarsController < ApplicationController
 
     def create
        
-        #@car = Car.new(params.require(:car).permit(:brand, :price, :car_type, :fuel_type, :condition, :color, :status, images: []))
-        params_hash = params.permit(:brand, :price, :car_type, :fuel_type, :condition, :color, :status, images: []).to_unsafe_h
-       
-        @car = Car.new(params_hash)
+        @car = Car.new(params.permit(:brand, :price, :car_type, :fuel_type, :condition, :color, :status, images: []))
         
+       
+        
+        @car.user_id= User.first  #check here
         if @car.save
             flash[:notice]="Car uploaded"
             redirect_to cars_path

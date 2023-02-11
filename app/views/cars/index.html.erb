@@ -3,10 +3,10 @@
 <%= link_to 'logout', logout_path, method: :delete %>
 <% if logged_in? %>
 <h2>Welcome  <%= current_user.name %> </h2>
-<% else %>
-<% end %>
 
-<div> <%= link_to 'Add New Car', new_car_path %> </div>
+
+
+<div> <%= link_to 'Add New Car', new_car_path %>  <%= link_to 'Edit Profile', edit_user_path(current_user.id) %> </div>
 <br/><br/><br/>
 <div>
     <% @cars.each do |car| %>
@@ -21,7 +21,7 @@
         <% car.images_as_thumbnails.each do |img| %>
             <%= link_to image_tag(img), img %>
         <% end %>
-        <div> <%=link_to 'edit',edit_car_path(car) %> </div>
+        <div> <%=link_to 'edit',edit_car_path(car) %>      <%=link_to 'buy', car_path(car) %> </div>
 
             <br/><br/><br/>
 
@@ -29,5 +29,5 @@
 </div>
 
 
-
+<% end %>
 

@@ -11,7 +11,7 @@
 
 
 
-<%= form_with car: @car, url: cars_path, local: true do |f| %>
+<%= form_with(car: :car, url: cars_path, local: true) do |f| %>
   <div>
     <%= f.label :brand %>
     <%= f.text_field :brand %>
