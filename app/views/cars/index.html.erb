@@ -6,7 +6,7 @@
 
 
 
-<div> <%= link_to 'Add New Car', new_car_path %>  <%= link_to 'Edit Profile', edit_user_path(current_user.id) %> </div>
+<div> <%= link_to 'Add New Car', new_car_path %>  <%= link_to 'Edit Profile', edit_user_path(current_user.id) %>  <%= link_to 'Ordered', ordered_path(@car) %></div>
 <br/><br/><br/>
 <div>
     <% @cars.each do |car| %>
@@ -68,6 +68,7 @@
             <% end %>
         
         </div>
+        
         <% car.images_as_thumbnails.each do |img| %>
             <%= link_to image_tag(img), img %>
         <% end %>

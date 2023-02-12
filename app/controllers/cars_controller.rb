@@ -53,4 +53,8 @@ class CarsController < ApplicationController
         @order.save
         redirect_to cars_path
     end
+
+    def display_ordered
+        
+    end
 end

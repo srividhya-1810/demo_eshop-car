@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   resources :cars, only: [:show, :index, :new, :create, :edit, :update]
   resources :orders, only: [:new, :create]
   
-  get 'ordered', to: 'orders#display_ordered'
+  get 'ordered', to: 'cars#display_ordered'
   get 'checkout',to: 'cars#add_to_order'
   
 end

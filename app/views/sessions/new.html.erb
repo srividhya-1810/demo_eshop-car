@@ -1,19 +1,39 @@
-<h1> LOG IN</h1>
 
+<style>
+.alert{
+  padding:20px;
+  margin-bottom:20px;
+  border: 1px solid black
+}
 
+  form{
+    width: 20%;
+    margin: 0 auto;
+    border: 1px solid black;
+    padding: 30px;
+  }
+</style>
+
+<div class="d-flex align-items-center justify-content-center">
+  <h1> LOG IN</h1>
+</div>
+<br/>
 <%= form_with(scope: :session,url: login_path) do |f| %>
 
+  
+
  <div class="form-group">
-    <%= f.label :email %>
-    <%= f.email_field :email %>
+    <%= f.label :email %><br/>
+    <%= f.email_field :email,class: "form-control-sm  input-sm" , placeholder: "email" %>
   </div>
 
+  <br/>
   <div class="form-group">
-    <%= f.label :password %>
-    <%= f.password_field :password %>
+    <%= f.label :password %><br/>
+    <%= f.password_field :password , class: "form-control-sm input-sm", placeholder:"password"%>
   </div>
-
+<br/>
   <div>
-	<%= f.submit "Sign in"%>
+	<%= f.submit "Sign in", class: "btn btn-primary"%>
   </div>
 <% end %>

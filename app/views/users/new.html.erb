@@ -1,47 +1,80 @@
-<h1>Sign up</h1>
+<style>
+.alert{
+  padding:20px;
+  margin-bottom:20px;
+  border: 1px solid black
+}
+
+  form{
+    width: 20%;
+    margin: 0 auto;
+    border: 1px solid black;
+    padding: 30px;
+  }
+</style>
+
 <%= flash[:notice] %>
+<div class="d-flex align-items-center justify-content-center">
+  <h1>Sign Up</h1>
+</div>
 <%= form_with(user: @user,url: signedup_path) do |f| %>
 
+
+
+
+  
   <% if @user.errors.any?  %>
     <div>
-      <% @user.errors.full_messages.each do |messages| %>
-        <div> <%= messages %> </div>
-      <% end %>
+      <div class="alert alert-danger" role="alert">
+        <h4 class: "alert-heading">Check for below errors.....</h4>
+    
+          <% @user.errors.full_messages.each do |messages| %>
+            <div class: "mb-0"> <%= messages %> </div>
+          <% end %>
+      </div>
     </div>
   <% end %>
 
-  <div class="form-group">
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-  </div>
+
+
 
   <div class="form-group">
-    <%= f.label :email %>
-    <%= f.email_field :email %>
+    <%= f.label :name %><br/>
+    <%= f.text_field :name ,class: "form-control-sm  input-sm" , placeholder: "name"%>
   </div>
 
+  <br/>
   <div class="form-group">
-    <%= f.label :password %>
-    <%= f.password_field :password %>
+    <%= f.label :email %><br/>
+    <%= f.email_field :email,class: "form-control-sm  input-sm" , placeholder: "email" %>
   </div>
 
+  <br/>
   <div class="form-group">
-    <%= f.label :address %>
-    <%= f.text_area :address %>
+    <%= f.label :password %><br/>
+    <%= f.password_field :password ,class: "form-control-sm  input-sm" , placeholder: "password"%>
   </div>
 
+  <br/>
   <div class="form-group">
-    <%= f.label :phone_number%>
-    <%= f.text_field :phone_number %>
+    <%= f.label :address %><br/>
+    <%= f.text_area :address ,class: "form-control-sm  input-sm" , placeholder: "address"%>
+  </div>
+  
+  <br/>
+  <div class="form-group">
+    <%= f.label :phone_number%><br/>
+    <%= f.text_field :phone_number,class: "form-control-sm  input-sm" , placeholder: "phone number" %>
   </div>
 
-
+  <br/>
   <div class="form-group">
     <%= f.label :user_type %>
-    <%= select_tag :user_type, options_for_select([['Seller', 1], ['Buyer', 2]]) %>  
+    <%= select_tag :user_type, options_for_select([['Seller', 1], ['Buyer', 2]]), class: "form-control" %>  
   </div>
 
+  <br/>
   <div>
-	<%= f.submit "Sign Up"%>
+	<%= f.submit "Sign Up", class: "btn btn-primary" %>
   </div>
 <% end %>
