@@ -1,5 +1,23 @@
-<h1>Edityour profile </h1>
-<%= flash[:notice] %>
+
+<style>
+.alert{
+  padding:20px;
+  margin-bottom:20px;
+  border: 1px solid black
+}
+
+  form{
+    width: 20%;
+    margin: 0 auto;
+    border: 1px solid black;
+    padding: 30px;
+  }
+</style>
+
+
+<div class="d-flex align-items-center justify-content-center">
+  <h1>Edit Your Profile</h1>
+</div>
 <%= form_with(model: @user,local: true) do |f| %>
 
   <% if @user.errors.any?  %>
@@ -11,37 +29,39 @@
   <% end %>
 
   <div class="form-group">
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-  </div>
+  <%= f.label :name %><br/>
+  <%= f.text_field :name ,class: "form-control-sm  input-sm" , placeholder: "name"%>
+</div>
 
-  <div class="form-group">
-    <%= f.label :email %>
-    <%= f.email_field :email %>
-  </div>
+<br/>
+<div class="form-group">
+  <%= f.label :email %><br/>
+  <%= f.email_field :email,class: "form-control-sm  input-sm" , placeholder: "email" %>
+</div>
 
-  <div class="form-group">
-    <%= f.label :password %>
-    <%= f.password_field :password %>
-  </div>
+<br/>
+<div class="form-group">
+  <%= f.label :password %><br/>
+  <%= f.password_field :password ,class: "form-control-sm  input-sm" , placeholder: "password"%>
+</div>
 
-  <div class="form-group">
-    <%= f.label :address %>
-    <%= f.text_area :address %>
-  </div>
+<br/>
+<div class="form-group">
+  <%= f.label :address %><br/>
+  <%= f.text_area :address ,class: "form-control-sm  input-sm" , placeholder: "address"%>
+</div>
 
-  <div class="form-group">
-    <%= f.label :phone_number%>
-    <%= f.text_field :phone_number %>
-  </div>
+<br/>
+<div class="form-group">
+  <%= f.label :phone_number%><br/>
+  <%= f.text_field :phone_number,class: "form-control-sm  input-sm" , placeholder: "phone number" %>
+</div>
+
+<br/>
 
 
-  <div class="form-group">
-    <%= f.label :user_type %>
-    <%= select_tag :user_type, options_for_select([['Seller', 1], ['Buyer', 2]]) %>  
-  </div>
-
-  <div>
-	<%= f.submit "Update"%>
-  </div>
+<br/>
+<div>
+<%= f.submit "Update", class: "btn btn-primary" %>
+</div>
 <% end %>

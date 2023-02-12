@@ -1,89 +1,155 @@
-<h1>Car Home Page</h1>
+<style>
+.flickr_pagination {
+  text-align: center;
+  padding: 0.3em;
+  cursor: default; }
+  .flickr_pagination a, .flickr_pagination span, .flickr_pagination em {
+    padding: 0.2em 0.5em; 
+    border-radius: 5p
+}
+  .flickr_pagination .disabled {
+    color: #aaaaaa; }
+  .flickr_pagination .current {
+    font-style: normal;
+    font-weight: bold;
+    color: black; }
+  .flickr_pagination a {
+    border: 1px solid #dddddd;
+    color: #0063dc;
+    text-decoration: none; }
+    .flickr_pagination a:hover, .flickr_pagination a:focus {
+      border-color: #003366;
+      background: #0063dc;
+      color: white; x;}
+  .flickr_pagination .page_info {
+    color: #aaaaaa;
+    padding-top: 0.8em; }
+  .flickr_pagination .previous_page, .flickr_pagination .next_page {
+    border-width: 2px; }
+  .flickr_pagination .previous_page {
+    margin-right: 1em; }
+  .flickr_pagination .next_page {
+    margin-left: 1em; }
+</style>
 
-<%= link_to 'logout', logout_path, method: :delete %>
 <% if logged_in? %>
 <h2>Welcome  <%= current_user.name %> </h2>
 
 
 
-<div> <%= link_to 'Add New Car', new_car_path %>  <%= link_to 'Edit Profile', edit_user_path(current_user.id) %>  <%= link_to 'Ordered', ordered_path(@car) %></div>
+
+
+
+
 <br/><br/><br/>
+<div class="flickr_pagination">
+    <%= will_paginate @cars, :container => false %>
+</div>
+
 <div>
+
+
+<div class="container">
+            <div class="row gy-3">
     <% @cars.each do |car| %>
-        <div>Brand: <%= car.brand %> </div> 
 
-        <div>Price: <%=  car.price %> </div>
-        <div>Cart Type: 
-            <% if car.car_type==0 %>
-                Suv
-            <% elsif car.car_type==1 %>
-                Hatchback
-            <% elsif car.car_type==2 %>
-                Crossover
-            <% elsif car.car_type==3 %>
-                Covertible 
-            <% elsif car.car_type==4 %>
-                Sedan
-            <% elsif car.car_type==5 %>
-                Sports 
-            <% elsif car.car_type==6 %>
-                Coupe
-            <% elsif car.car_type==7 %>
-                Minivan
-            <% elsif car.car_type==8 %>
-                Wagon
-            <% else %>
-                Pick Up Truck
-            <% end %>
-        </div>
-
-        <div>Fuel Type: 
-            <% if car.fuel_type==0 %>
-                Petrol
-            <% elsif car.fuel_type==1 %>
-                Diesel 
-            <% elsif car.fuel_type==2 %>
-                Ethanol
-            <% elsif car.fuel_type==3 %>
-                Electric Battery
-            <% else %>
-                Hydrogen
-            <% end %> 
-        </div>
-
-        <div>Condition: 
-            <% if car.condition==0 %>
-                New
-            <% else %>
-                2nd Hand
-            <% end %>
-        </div>
-
-        <div>Color:<%=  car.color %> </div>
-        <div>Status:  
-            <% if car.status==0 %>
-                Available
-            <% else %>
-                Sold
-            <% end %>
         
-        </div>
-        
-        <% car.images_as_thumbnails.each do |img| %>
-            <%= link_to image_tag(img), img %>
-        <% end %>
-        <div> <%=link_to 'edit',edit_car_path(car) %> 
+                <div class="col-md-3">
+                    <div class="card" style="width: 18rem;">
+            
 
-            <% if car.status==0 %>
-             <%=link_to 'buy', car_path(car) %> 
-             <% end %>
-             </div>
+                        <% car.images_as_thumbnails.each do |img| %>
+                            <%= link_to image_tag(img, size: "286x180"), class: "card-img-top", alt:"Card image cap" %>
+                        <% end %>
+                        <div class="card-body">
+                            <h5 class="card-title"> <%= car.brand %> </h5>
+                            <h5 class="card-title"> Price:<%=  car.price %> </h5>
+                            <p class="card-text"><i>
+                                Car Type:
+                                <% if car.car_type==0 %>
+                                    Suv
+                                <% elsif car.car_type==1 %>
+                                    Hatchback
+                                <% elsif car.car_type==2 %>
+                                    Crossover
+                                <% elsif car.car_type==3 %>
+                                    Covertible 
+                                <% elsif car.car_type==4 %>
+                                    Sedan
+                                <% elsif car.car_type==5 %>
+                                    Sports 
+                                <% elsif car.car_type==6 %>
+                                    Coupe
+                                <% elsif car.car_type==7 %>
+                                    Minivan
+                                <% elsif car.car_type==8 %>
+                                    Wagon
+                                <% else %>
+                                    Pick Up Truck
+                                <% end %>
+                            </i> </p>
+                            <p class="card-text"><i>
+                                Fuel Type: 
+                                <% if car.fuel_type==0 %>
+                                    Petrol
+                                <% elsif car.fuel_type==1 %>
+                                    Diesel 
+                                <% elsif car.fuel_type==2 %>
+                                    Ethanol
+                                <% elsif car.fuel_type==3 %>
+                                    Electric Battery
+                                <% else %>
+                                    Hydrogen
+                                <% end %>
+                            </i></p>
+                            <p class="card-text"><i>
+                                Condition: 
+                                <% if car.condition==0 %>
+                                    New
+                                <% else %>
+                                    2nd Hand
+                                <% end %>
+                            </p></i>
+
+                            <p class="card-text"><i>
+                                Color:<%=  car.color %>
+                            </i></p>
+                            <p class="card-text"><i>
+                                
+                                <% if car.status==0 %>
+                                <div style= "color: green;">Status: Available</div>
+                                <% else %>
+                                <div style= "color: #ff0000;">Status: Sold</div>
+                                <% end %>
+                            </i></p>
+                            <%=link_to 'edit',edit_car_path(car) , class:"btn btn-primary" %>
+                            <% if car.status==0 %>
+                                <%=link_to 'buy', car_path(car), class:"btn btn-primary" %> 
+                            <% end %>
+                    
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+              
+        
+       
 
             <br/><br/><br/>
 
     <% end %> <br/>
+            
+        </div>
+    </div>
+
 </div>
 
+<div class="flickr_pagination mb-4">
+    <%= will_paginate @cars, :container => false %>
+</div>
 
 <% end %>
 

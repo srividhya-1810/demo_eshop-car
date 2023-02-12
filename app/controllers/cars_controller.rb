@@ -1,7 +1,8 @@
 class CarsController < ApplicationController
     #before_action :require_user
     def index
-        @cars =Car.all
+        @cars =Car.paginate(page: params[:page], per_page: 8)
+
 
     end
 
@@ -55,6 +56,6 @@ class CarsController < ApplicationController
     end
 
     def display_ordered
-        
+
     end
 end

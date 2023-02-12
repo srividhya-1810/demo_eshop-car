@@ -1,4 +1,20 @@
-<h1>EDIT ARTICLE</h1>
+
+<style>
+.alert{
+  padding:20px;
+  margin-bottom:20px;
+  border: 1px solid black
+}
+
+  form{
+    width: 20%;
+    margin: 0 auto;
+    border: 1px solid black;
+    padding: 30px;
+  }
+</style>
+
+
 <% if @car.errors.any? %>
   <h2>Following errors prevented from creating </h2>
   <ul>
@@ -10,52 +26,61 @@
 <% end %>
 
 
+<div class="d-flex align-items-center justify-content-center">
+  <h1>Edit Car</h1>
+</div>
 
 <%= form_with(model: @car, local: true) do |f| %>
-  <div>
-    <%= f.label :brand %>
-    <%= f.text_field :brand %>
+    <div class: "form-group">
+    <%= f.label :brand %><br/>
+    <%= f.text_field :brand,class: "form-control-sm  input-sm" , placeholder: "brand" %>
+  </div>
+  
+  <br/>
+  <div class: "form-group">
+    <%= f.label :price %><br/>
+    <%= f.number_field :price,class: "form-control-sm  input-sm" , placeholder: "price"%>
   </div>
 
-  <div>
-    <%= f.label :price %>
-    <%= f.number_field :price %>
+  <br/>
+  <div class: "form-group">
+    <%= f.label :car_type %><br/>
+    <%= select_tag :car_type, options_for_select([['SUV', 0], ['HATCHBACK', 1],['CROSSOVER', 2], ['CONVERTIBLE', 3], ['SEDAN', 4], ['SPORTS', 5], ['COUPE', 6], ['MINIVAN', 7], ['WAGON', 8], ['PICK UP TRUCK', 9]]) , class: "form-control" %>  
   </div>
 
-  <div>
-    <%= f.label :car_type %>
-    <%= select_tag :car_type, options_for_select([['SUV', 0], ['HATCHBACK', 1],['CROSSOVER', 2], ['CONVERTIBLE', 3], ['SEDAN', 4], ['SPORTS', 5], ['COUPE', 6], ['MINIVAN', 7], ['WAGON', 8], ['PICK UP TRUCK', 9]])  %>  
-  </div>
-
-  <div>
-    <%= f.label :fuel_type %>
-    <%= select_tag :fuel_type, options_for_select([['Petrol', 0], ['diesel', 1], ['Ethanol', 2], ['Electric Battery', 3], ['Hydrogen', 4]]) %>  
+  <br/>
+  <div class: "form-group">
+    <%= f.label :fuel_type %><br/>
+    <%= select_tag :fuel_type, options_for_select([['Petrol', 0], ['diesel', 1], ['Ethanol', 2], ['Electric Battery', 3], ['Hydrogen', 4]]) , class: "form-control"%>  
    </div>
 
-  <div>
-    <%= f.label :condition %>
-    <%= select_tag :condition, options_for_select([['New', 0], ['2nd Hand', 1]]) %>  
+   <br/>
+  <div class: "form-group">
+    <%= f.label :condition %><br/>
+    <%= select_tag :condition, options_for_select([['New', 0], ['2nd Hand', 1]]) , class: "form-control"%>  
   </div>
 
 
-
-  <div>
-    <%= f.label :color %>
-    <%= f.text_field :color %>
+  <br/>
+  <div class: "form-group">
+    <%= f.label :color %><br/>
+    <%= f.text_field :color,class: "form-control-sm  input-sm" , placeholder: "color" %>
   </div>
 
-
-  <div>
-    <%= f.label :status %>
-    <%= select_tag :status, options_for_select([['Available', 0], ['Sold', 1]]) %>  
+  <br/>
+  <div class: "form-group">
+    <%= f.label :status %><br/>
+    <%= select_tag :status, options_for_select([['Available', 0], ['Sold', 1]]) , class: "form-control"%>  
   </div>
 
-  <div>
-    <%= f.label :images %>
+  <br/>
+  <div class: "form-group">
+    <%= f.label :images %><br/>
     <%= f.file_field :images, multiple: true %>
-
+</div>
+    <br/>
   <div>
-    <%= f.submit "update" %>
+    <%= f.submit "Update", class: "btn btn-primary" %>
   </div>
   
 <% end %>

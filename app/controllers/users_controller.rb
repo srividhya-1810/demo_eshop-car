@@ -6,7 +6,7 @@ class UsersController < ApplicationController
             session[:user_id]=@user.id        
             redirect_to login_path, notice: "Successfully Created Account "
          else
-            flash[:alert]="Please fill in the details...."
+            flash.now[:alert]="Please fill in the details...."
             render :new, status: 302
          end
 
