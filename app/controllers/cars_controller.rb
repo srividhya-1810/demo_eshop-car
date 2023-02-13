@@ -56,6 +56,15 @@ class CarsController < ApplicationController
     end
 
     def display_ordered
+        
+        @orders=Order.where(user_id: current_user.id)
+        
+
+
+
+        
+
+        
 
     end
 end

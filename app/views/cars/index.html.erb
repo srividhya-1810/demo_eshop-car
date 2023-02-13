@@ -33,7 +33,6 @@
 </style>
 
 <% if logged_in? %>
-<h2>Welcome  <%= current_user.name %> </h2>
 
 
 
@@ -56,14 +55,44 @@
         
                 <div class="col-md-3">
                     <div class="card" style="width: 18rem;">
-            
 
+
+
+
+
+                    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner">
+                       
                         <% car.images_as_thumbnails.each do |img| %>
-                            <%= link_to image_tag(img, size: "286x180"), class: "card-img-top", alt:"Card image cap" %>
-                        <% end %>
+                            
+                            <div class="carousel-item active" >
+                            <%= link_to image_tag(img, size: "286x180"), class: "card-img-top", alt:"first slide" %>
+
+                            </div>
+
+                            
+                            
+
+                           
+                            <% end %>
+
+                           
+                        </div>
+                        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                        </div>
+                                    
+
                         <div class="card-body">
                             <h5 class="card-title"> <%= car.brand %> </h5>
-                            <h5 class="card-title"> Price:<%=  car.price %> </h5>
+                            <h5 class="card-title"> Price:<%= number_with_delimiter(car.price, :delimiter => ',') %>
+                            </h5>
                             <p class="card-text"><i>
                                 Car Type:
                                 <% if car.car_type==0 %>
@@ -122,7 +151,14 @@
                                 <div style= "color: #ff0000;">Status: Sold</div>
                                 <% end %>
                             </i></p>
-                            <%=link_to 'edit',edit_car_path(car) , class:"btn btn-primary" %>
+                            <% if current_user.user_type==1 %>
+                                <%=link_to 'edit',edit_car_path(car) , class:"btn btn-primary" %>
+                            <% else %>
+                                <% if car.status==1 %>
+                                    <br/><p></p>
+                                <% end %>
+                            <% end %>
+                            
                             <% if car.status==0 %>
                                 <%=link_to 'buy', car_path(car), class:"btn btn-primary" %> 
                             <% end %>

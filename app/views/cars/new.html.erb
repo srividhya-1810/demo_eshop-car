@@ -35,7 +35,7 @@
 <%= form_with(car: :car, url: cars_path, local: true) do |f| %>
   <div class: "form-group">
     <%= f.label :brand %><br/>
-    <%= f.text_field :brand,class: "form-control-sm  input-sm" , placeholder: "brand" %>
+    <%= f.text_field :brand,class: "form-control-sm  input-sm" , placeholder: "brand",required: true %>
   </div>
   
   <br/>
@@ -47,32 +47,32 @@
   <br/>
   <div class: "form-group">
     <%= f.label :car_type %><br/>
-    <%= select_tag :car_type, options_for_select([['SUV', 0], ['HATCHBACK', 1],['CROSSOVER', 2], ['CONVERTIBLE', 3], ['SEDAN', 4], ['SPORTS', 5], ['COUPE', 6], ['MINIVAN', 7], ['WAGON', 8], ['PICK UP TRUCK', 9]]) , class: "form-control" %>  
+    <%= select_tag :car_type, options_for_select([['SUV', 0], ['HATCHBACK', 1],['CROSSOVER', 2], ['CONVERTIBLE', 3], ['SEDAN', 4], ['SPORTS', 5], ['COUPE', 6], ['MINIVAN', 7], ['WAGON', 8], ['PICK UP TRUCK', 9]]) , class: "form-control" ,:style => "width:235px"%>  
   </div>
 
   <br/>
   <div class: "form-group">
     <%= f.label :fuel_type %><br/>
-    <%= select_tag :fuel_type, options_for_select([['Petrol', 0], ['diesel', 1], ['Ethanol', 2], ['Electric Battery', 3], ['Hydrogen', 4]]) , class: "form-control"%>  
+    <%= select_tag :fuel_type, options_for_select([['Petrol', 0], ['diesel', 1], ['Ethanol', 2], ['Electric Battery', 3], ['Hydrogen', 4]]) , class: "form-control",:style => "width:235px"%>  
    </div>
 
    <br/>
   <div class: "form-group">
     <%= f.label :condition %><br/>
-    <%= select_tag :condition, options_for_select([['New', 0], ['2nd Hand', 1]]) , class: "form-control"%>  
+    <%= select_tag :condition, options_for_select([['New', 0], ['2nd Hand', 1]]) , class: "form-control",:style => "width:235px"%>  
   </div>
 
 
   <br/>
   <div class: "form-group">
     <%= f.label :color %><br/>
-    <%= f.text_field :color,class: "form-control-sm  input-sm" , placeholder: "color" %>
+    <%= f.text_field :color,class: "form-control-sm  input-sm" , placeholder: "color",required: true %>
   </div>
 
   <br/>
   <div class: "form-group">
     <%= f.label :status %><br/>
-    <%= select_tag :status, options_for_select([['Available', 0], ['Sold', 1]]) , class: "form-control"%>  
+    <%= select_tag :status, options_for_select([['Available', 0], ['Sold', 1]]) , class: "form-control",:style => "width:235px"%>  
   </div>
 
   <br/>

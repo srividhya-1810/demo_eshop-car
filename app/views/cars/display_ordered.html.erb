@@ -1,4 +1,4 @@
 <h1>ORDERED</h1>
-
-
- 
+<% @orders.each do |order| %>
+    <p><%= Car.find(order.car_id).brand %></p>
+<% end %> 

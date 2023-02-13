@@ -12,7 +12,19 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
+<style>
 
+ .leftside{
+  position:absolute;
+  right: 90px;
+  top: 0px;
+  }
+  .leftside2{
+  position:absolute;
+  right: 0px;
+  top: 0px;
+  }
+</style>
   <body>
 
   <nav class="navbar navbar-expand-lg navbar-light bg-dark">
@@ -39,9 +51,11 @@
 
 
     <% if logged_in? %>
+    <div class="leftside">
       <li class="nav-item">
         <%= link_to "Ordered", ordered_path, class: "nav-link",style: "color: white;"  %> 
       </li>
+      </div>
     <% else %>
       <li class="nav-item">
         <%= link_to "Login", login_path, class: "nav-link",style: "color: white;" %> 
@@ -49,18 +63,23 @@
     <% end %>
 
     <% if logged_in? %>
+    <% if current_user.user_type==1 %>
       <li class="nav-item">
-        <%= link_to "Add New Car", new_car_path, class: "nav-link",style: "color: white;"  %> 
+        <%= link_to "Sell Car", new_car_path, class: "nav-link",style: "color: white;"  %> 
       </li>
+      <%end%>
     <% else %>
       
     <% end %>
 
 
     <% if logged_in? %>
+    <div class="leftside2">
       <li class="nav-item">
         <%= link_to "Logout", logout_path, class: "nav-link",style: "color: white;" %>
+        
       </li>
+      </div>
     <% end %>
     
   </ul>
@@ -71,7 +90,7 @@
 
     <% flash.each do |message_type, message| %>
       <% if message_type=="alert" %>
-        <div class="alert alert-danger " role="alert">
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
           <%= message %>
         </div>
       <% else %>
