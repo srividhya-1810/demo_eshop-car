@@ -1,3 +1,4 @@
+
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&family=Work+Sans:wght@800&display=swap');
 
@@ -9,9 +10,7 @@
 
 }
 
-body {
-    background-color: #808080;
-}
+
 
 .container {
     margin: 20px auto;
@@ -154,7 +153,7 @@ h5,
     width: 30px;  
     height: 20px;  
     padding-top: 100px;
-    
+
 
 }
 
@@ -193,21 +192,21 @@ function showDivs(n) {
                     <% @car.images_as_thumbnails.each do |img| %>
                     <div class="w3-content w3-display-container">
                     <div class="mySlides">
-                    
+
                         <%= link_to image_tag(img, size: "500x500"), img %>
                     </div>
 
-                        
+
                     </div>
-                         
+
                   <% end %>
                   <button class="w3-button w3-black w3-display-left" id="b1" onclick="plusDivs(-1)">&#10094;</button>
                     <button class="w3-button w3-black w3-display-right" id="b2" onclick="plusDivs(1)">&#10095;</button>
-                   
-                    
-                    
- 
-                        
+
+
+
+
+
 
                     <div class="row m-0 bg-light">
                         <div class="col-md-4 col-6 ps-30 pe-0 my-4">
@@ -282,17 +281,17 @@ function showDivs(n) {
                         </div>
                     </div>
                     <% if @car.status==0 %>
-                    <div class="row m-0">
 
-                    <div class="btn btn-primary"><%= link_to 'Purchase', checkout_path(@car) %><span class="fas fa-arrow-right ps-2"></span>
-                    </div>
+                        <% if current_user.user_type==2 %>
+                        <%= link_to 'Purchase', checkout_path(@car)  %>
+
+                        <% else %>
+                        <%= link_to 'Edit', edit_car_path(@car)  %>
+
+                        <% end %>
+                    
                     <% end %>
                 </div>
             </div>
 
 
-
-
-
-        
-        

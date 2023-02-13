@@ -1,7 +1,12 @@
 class CarsController < ApplicationController
     #before_action :require_user
     def index
-        @cars =Car.paginate(page: params[:page], per_page: 8)
+        if current_user.user_type==2
+            
+            @cars =Car.all.paginate(page: params[:page], per_page: 8)
+        else
+            @cars=Car.where(user_id: current_user.id).paginate(page:params[:page],per_page:8)
+        end
 
 
     end
