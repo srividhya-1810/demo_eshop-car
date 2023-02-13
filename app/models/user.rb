@@ -21,7 +21,7 @@ PASSWORD_FORMAT = /\A
                   /x
 
     validates :password, 
-                  length: { in: 6..20 }, 
+                  presence: true, 
                   format: { with: PASSWORD_FORMAT } 
 
     validates :address, presence: true

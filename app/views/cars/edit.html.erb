@@ -406,6 +406,20 @@ input[type=text]:placeholder {
     <%= f.label :images %><br/>
     <%= f.file_field :images, multiple: true %>
 </div>
+
+<div class="form-group">
+    <%= f.label :images do %>
+      <% if f.object.images.attached? %>
+        The currently attached file is <%= f.object.images %>. Click here to replace this file.
+      <% else %>
+        No file has been uploaded yet. Please pick a file.
+      <% end %>
+    <% end %>
+  
+    <%= f.file_field :identity_proof %>
+
+
+
     <br/>
   <div>
     <%= f.submit "Update", class: "btn btn-primary" %>
