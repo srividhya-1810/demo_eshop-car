@@ -56,8 +56,12 @@ class CarsController < ApplicationController
     end
 
     def display_ordered
-        
-        @orders=Order.where(user_id: current_user.id)
+
+        if current_user.user_type==2 
+            @orders=Order.where(user_id: current_user.id)
+        else 
+            @seller_cars=Car.where(user_id: current_user.id)
+        end 
         
 
 

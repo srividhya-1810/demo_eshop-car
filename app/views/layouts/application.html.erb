@@ -24,6 +24,11 @@
   right: 0px;
   top: 0px;
   }
+  .cent{
+  position:absolute;
+  right: 1000px;
+  top: 0px;
+  }
 </style>
   <body>
 
@@ -47,6 +52,19 @@
       <li class="nav-item">
         <%= link_to "Sign Up", signup_path, class: "nav-link",style: "color: white;"  %> 
       </li>
+    <% end %>
+
+    <% if logged_in? %>
+    <li class="nav-item">
+    <b><div style="color:white;" class="cent">
+        Hello <% if current_user.user_type==1 %>
+                Seller
+                <% else %>
+                Buyer
+                <% end %>
+                , <%= current_user.name %>
+                </div></b>
+    </li>
     <% end %>
 
 

@@ -30,6 +30,16 @@
     margin-right: 1em; }
   .flickr_pagination .next_page {
     margin-left: 1em; }
+
+    .resol {
+  image-resolution: from-image 300dpi;
+}
+
+
+.embed-responsive .card-img-top {
+    object-fit: cover;
+}
+
 </style>
 
 <% if logged_in? %>
@@ -59,34 +69,24 @@
 
 
 
-
-                    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                        <div class="carousel-inner">
-                       
+                        <% c=1 %>
+                       <div class="resol"
                         <% car.images_as_thumbnails.each do |img| %>
                             
-                            <div class="carousel-item active" >
-                            <%= link_to image_tag(img, size: "286x180"), class: "card-img-top", alt:"first slide" %>
+                            <%= link_to image_tag(img, size: "286x180"), class: "card-img-top embed-responsive-item", alt:"first slide" %>
 
-                            </div>
-
+                            <% if c==1 %>
+                                <% break %>
+                            <% end %>
                             
                             
 
                            
                             <% end %>
+                        </div>
 
                            
-                        </div>
-                        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
-                        </div>
+                        
                                     
 
                         <div class="card-body">
@@ -153,15 +153,13 @@
                             </i></p>
                             <% if current_user.user_type==1 %>
                                 <%=link_to 'edit',edit_car_path(car) , class:"btn btn-primary" %>
-                            <% else %>
-                                <% if car.status==1 %>
-                                    <br/><p></p>
-                                <% end %>
+                            
+                                
                             <% end %>
                             
-                            <% if car.status==0 %>
-                                <%=link_to 'buy', car_path(car), class:"btn btn-primary" %> 
-                            <% end %>
+                           
+                                <%=link_to 'view', car_path(car), class:"btn btn-primary" %> 
+                           
                     
                         </div>
                     </div>

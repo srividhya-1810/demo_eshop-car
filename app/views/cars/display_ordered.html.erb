@@ -1,4 +1,13 @@
 <h1>ORDERED</h1>
-<% @orders.each do |order| %>
-    <p><%= Car.find(order.car_id).brand %></p>
-<% end %> 
+
+<% if current_user.user_type==2 %>
+    <% @orders.each do |order| %>
+        <p><% @car = Car.find(order.car_id) %></p>
+        <p> <%= @car.brand %></p>
+    <% end %>
+    
+<% else %>
+<% @seller_cars.each do |car1| %>
+    <p> <%= car1.brand %></p>
+<% end %>  
+<% end %>
