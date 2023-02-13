@@ -8,10 +8,14 @@
     <% end %>
     
 <% else %>
-<% @seller_cars.each do |car1| %>
     <h1> Sold Orders </h1>
-    <% if car1.status==1 %>
-    <p> <%= car1.brand %></p>
-    <% end %>
-<% end %>  
+
+    <% @seller_cars.each do |car1| %>
+        <% if car1.status==1 %>
+        <p> <%= car1.brand %></p>
+        <% end %>
+    <% end %>  
+
+
+    
 <% end %>
