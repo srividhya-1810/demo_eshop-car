@@ -20,7 +20,7 @@ PASSWORD_FORMAT = /\A
                   (?=.*[[:^alnum:]]) # Must contain a symbol
                   /x
 
-    validates :password, 
+    validates :password_digest, 
                   presence: true, 
                   format: { with: PASSWORD_FORMAT } 
 

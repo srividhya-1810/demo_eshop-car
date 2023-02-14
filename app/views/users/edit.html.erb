@@ -299,6 +299,13 @@ input[type=text]:placeholder {
   width:60%;
 }
 
+label{
+  font-weight: bold;
+  color: #5F9EA0;
+
+}
+
+
 </style>
 
 
@@ -331,9 +338,10 @@ input[type=text]:placeholder {
 </div>
 
 <br/>
+
 <div class="form-group">
   <%= f.label :password %><br/>
-  <%= f.password_field :password  , placeholder: "password"%>
+  <%= f.password_field :password_digest  , placeholder: "password"%>
 </div>
 
 <br/>

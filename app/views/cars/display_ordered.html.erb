@@ -1,19 +1,509 @@
 
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&family=Work+Sans:wght@800&display=swap');
+
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+
+
+}
+
+
+
+.container {
+    margin: 20px auto;
+    max-width: 2000px;
+    height: 1000px;
+    background-color: white;
+    padding: 50px;
+    padding-left: 500px;
+}
+
+
+.form-control {
+    height: 25px;
+    width: 150px;
+    border: none;
+    border-radius: 0;
+    font-weight: 800;
+    padding: 0 0 5px 0;
+    background-color: transparent;
+    box-shadow: none;
+    outline: none;
+    border-bottom: 2px solid #ccc;
+    margin: 0;
+    font-size: 14px;
+}
+
+.form-control:focus {
+    box-shadow: none;
+    border-bottom: 2px solid #ccc;
+    background-color: transparent;
+}
+
+.form-control2 {
+    font-size: 14px;
+    height: 20px;
+    width: 55px;
+    border: none;
+    border-radius: 0;
+    font-weight: 800;
+    padding: 0 0 5px 0;
+    background-color: transparent;
+    box-shadow: none;
+    outline: none;
+    border-bottom: 2px solid #ccc;
+    margin: 0;
+}
+
+.form-control2:focus {
+    box-shadow: none;
+    border-bottom: 2px solid #ccc;
+    background-color: transparent;
+}
+
+.form-control3 {
+    font-size: 14px;
+    height: 20px;
+    width: 30px;
+    border: none;
+    border-radius: 0;
+    font-weight: 800;
+    padding: 0 0 5px 0;
+    background-color: transparent;
+    box-shadow: none;
+    outline: none;
+    border-bottom: 2px solid #ccc;
+    margin: 0;
+}
+
+.form-control3:focus {
+    box-shadow: none;
+    border-bottom: 2px solid #ccc;
+    background-color: transparent;
+}
+
+p {
+    margin: 0;
+}
+
+img {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+}
+
+.text-muted {
+    font-size: 10px;
+}
+
+.textmuted {
+    color: #6c757d;
+    font-size: 13px;
+}
+
+.fs-14 {
+    font-size: 14px;
+}
+
+.btn.btn-primary {
+    width: 100%;
+    height: 55px;
+    border-radius: 0;
+    padding: 13px 0;
+    background-color: black;
+    border: none;
+    font-weight: 600;
+}
+
+.btn.btn-primary:hover .fas {
+    transform: translateX(10px);
+    transition: transform 0.5s ease
+}
+
+
+.fw-900 {
+    font-weight: 900;
+}
+
+::placeholder {
+    font-size: 12px;
+}
+
+.ps-30 {
+    padding-left: 30px;
+}
+
+.h4 {
+    font-family: 'Work Sans', sans-serif !important;
+    font-weight: 800 !important;
+}
+
+.textmuted,
+h5,
+.text-muted {
+    font-family: 'Poppins', sans-serif;
+}
+
+
+
+.mySlides {display:none;}
+
+{
+    width: 30px;  
+    height: 20px;  
+    padding-top: 100px;
+
+
+}
+
+
+.flickr_pagination {
+  text-align: center;
+  padding: 0.3em;
+  cursor: default; }
+  .flickr_pagination a, .flickr_pagination span, .flickr_pagination em {
+    padding: 0.2em 0.5em; 
+    border-radius: 5p
+}
+  .flickr_pagination .disabled {
+    color: #aaaaaa; }
+  .flickr_pagination .current {
+    font-style: normal;
+    font-weight: bold;
+    color: black; }
+  .flickr_pagination a {
+    border: 1px solid #dddddd;
+    color: #0063dc;
+    text-decoration: none; }
+    .flickr_pagination a:hover, .flickr_pagination a:focus {
+      border-color: #003366;
+      background: #0063dc;
+      color: white; x;}
+  .flickr_pagination .page_info {
+    color: #aaaaaa;
+    padding-top: 0.8em; }
+  .flickr_pagination .previous_page, .flickr_pagination .next_page {
+    border-width: 2px; }
+  .flickr_pagination .previous_page {
+    margin-right: 1em; }
+  .flickr_pagination .next_page {
+    margin-left: 1em; }
+
+</style>
+
+
+
+<script>
+var slideIndex = 1;
+showDivs(slideIndex);
+
+function plusDivs(n) {
+  showDivs(slideIndex += n);
+}
+
+function showDivs(n) {
+  var i;
+  var x = document.getElementsByClassName("mySlides");
+  if (n > x.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = x.length}
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";  
+  }
+  x[slideIndex-1].style.display = "block";  
+}
+</script>
+
+
 <% if current_user.user_type==2 %>
-    <h1>Your Orders</h1>
+
+    <div class="d-flex align-items-center justify-content-center">
+        <h1>Your Orders</h1>
+    </div>
+
+    <div class="flickr_pagination">
+        <%= will_paginate @orders, :container => false %>
+    </div>
+
+
+
 
     <% @orders.each do |order| %>
         <p><% @car = Car.find(order.car_id) %></p>
-        <p> <%= @car.brand %></p>
+
+
+        <div class="container">
+        <div class="row m-0">
+            <div class="col-lg-7 pb-5 pe-lg-5">
+                <div class="row">
+                    <div class="col-12 p-5">
+
+                    <% c=1 %>
+                    <% @car.images.each do |img| %>
+                    <div class="w3-content w3-display-container">
+                    <div class="mySlides">
+
+                        <%= link_to image_tag(img, size: "500x500"), img %>
+                    </div>
+
+
+                    </div>
+
+                  <% end %>
+                 <button class="w3-button w3-black w3-display-left"  onclick="plusDivs(-1)">&#10094;</button>
+                 <button class="w3-button w3-black w3-display-right"  onclick="plusDivs(1)">&#10095;</button>
+
+
+
+
+
+
+                    <div class="row m-0 bg-light">
+                        <div class="col-md-4 col-6 ps-30 pe-0 my-4">
+                            <p class="text-muted">Brand</p>
+                            <p class="h5"> <%= @car.brand  %></p>
+                        </div>
+                        <div class="col-md-4 col-6  ps-30 my-4">
+                            <p class="text-muted">Car Type</p>
+                            <p class="h5 m-0">
+                                <% if @car.car_type==0 %>
+                                    Suv
+                                <% elsif @car.car_type==1 %>
+                                    Hatchback
+                                <% elsif @car.car_type==2 %>
+                                    Crossover
+                                <% elsif @car.car_type==3 %>
+                                    Covertible 
+                                <% elsif @car.car_type==4 %>
+                                    Sedan
+                                <% elsif @car.car_type==5 %>
+                                    Sports 
+                                <% elsif @car.car_type==6 %>
+                                    Coupe
+                                <% elsif @car.car_type==7 %>
+                                    Minivan
+                                <% elsif @car.car_type==8 %>
+                                    Wagon
+                                <% else %>
+                                    Pick Up Truck
+                                <% end %>
+                            </p>
+                        </div>
+                        <div class="col-md-4 col-6 ps-30 my-4">
+                            <p class="text-muted">Fuel Type</p>
+                            <p class="h5 m-0">
+                               <% if @car.fuel_type==0 %>
+                                    Petrol
+                                <% elsif @car.fuel_type==1 %>
+                                    Diesel 
+                                <% elsif @car.fuel_type==2 %>
+                                    Ethanol
+                                <% elsif @car.fuel_type==3 %>
+                                    Electric Battery
+                                <% else %>
+                                    Hydrogen
+                                <% end %>
+                            </p>
+                        </div>
+                        <div class="col-md-4 col-6 ps-30 my-4">
+                            <p class="text-muted">Condition</p>
+                            <p class="h5 m-0">
+                                <% if @car.condition==0 %>
+                                    New
+                                <% else %>
+                                    2nd Hand
+                                <% end %>
+                            </p>
+                        </div>
+                        <div class="col-md-4 col-6 ps-30 my-4">
+                            <p class="text-muted">Color</p>
+                            <p class="h5 m-0"><%= @car.color %></p>
+                        </div>
+                        <div class="col-md-4 col-6 ps-30 my-4">
+                            <p class="text-muted">Status</p>
+                            <p class="h5 m-0">
+                            <% if @car.status==0 %>
+                                <div style= "color: green;"> Available</div>
+                                <% else %>
+                                <div style= "color: #ff0000;"> Sold</div>
+                                <% end %>
+                            </p>
+                        </div>
+                    </div>
+                    <% if @car.status==0 %>
+
+                        <% if current_user.user_type==2 %>
+                        <%= link_to 'Purchase', checkout_path(@car)  %>
+
+                        <% else %>
+                        <%= link_to 'Edit', edit_car_path(@car)  %>
+
+                        <% end %>
+                    
+                    <% end %>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
     <% end %>
     
 <% else %>
-    <h1> Sold Orders </h1>
+    <div class="d-flex align-items-center justify-content-center">
+        <h1>Sold Orders</h1>
+    </div>
+    
+
+    <div class="flickr_pagination">
+        <%= will_paginate @seller_cars, :container => false %>
+    </div>
 
     <% @seller_cars.each do |car1| %>
         <% if car1.status==1 %>
-        <p> <%= car1.brand %></p>
+        
+            
+            <div class="container">
+            <div class="row m-0">
+                <div class="col-lg-7 pb-5 pe-lg-5">
+                    <div class="row">
+                        <div class="col-12 p-5">
+
+                        <% c=1 %>
+                        <% car1.images.each do |img| %>
+                        <div class="w3-content w3-display-container">
+                        <div class="mySlides">
+
+                            <%= link_to image_tag(img, size: "500x500"), img %>
+                        </div>
+
+
+                        </div>
+
+                    <% end %>
+                    <button class="w3-button w3-black w3-display-left"  onclick="plusDivs(-1)">&#10094;</button>
+                    <button class="w3-button w3-black w3-display-right"  onclick="plusDivs(1)">&#10095;</button>
+
+
+
+                    
+                
+                    
+
+                        <div class="row m-0 bg-light">
+
+
+                            <div class="col-md-4 col-6 ps-30 my-4"></div>
+                            <div class="col-md-4 col-6 ps-30 my-4" style="color:#A020F0;">
+                                <p class="text-muted">Brought By</p>
+                                <p class="h5 m-0"><% car2=Order.find_by(car_id: car1.id) %>
+                                <% brought_user=User.find(car2.user_id) %>
+                                <b><%= brought_user.name %></b></p>
+                            </div>
+                            <div class="col-md-4 col-6 ps-30 my-4"></div>
+
+                            
+                            <div class="col-md-4 col-6 ps-30 pe-0 my-4">
+                                <p class="text-muted">Brand</p>
+                                <p class="h5"> <%= car1.brand  %></p>
+                            </div>
+                            <div class="col-md-4 col-6  ps-30 my-4">
+                                <p class="text-muted">Car Type</p>
+                                <p class="h5 m-0">
+                                    <% if car1.car_type==0 %>
+                                        Suv
+                                    <% elsif @car.car_type==1 %>
+                                        Hatchback
+                                    <% elsif car1.car_type==2 %>
+                                        Crossover
+                                    <% elsif @car.car_type==3 %>
+                                        Covertible 
+                                    <% elsif car1.car_type==4 %>
+                                        Sedan
+                                    <% elsif @car.car_type==5 %>
+                                        Sports 
+                                    <% elsif car1.car_type==6 %>
+                                        Coupe
+                                    <% elsif car1.car_type==7 %>
+                                        Minivan
+                                    <% elsif car1.car_type==8 %>
+                                        Wagon
+                                    <% else %>
+                                        Pick Up Truck
+                                    <% end %>
+                                </p>
+                            </div>
+                            <div class="col-md-4 col-6 ps-30 my-4">
+                                <p class="text-muted">Fuel Type</p>
+                                <p class="h5 m-0">
+                                <% if car1.fuel_type==0 %>
+                                        Petrol
+                                    <% elsif car1.fuel_type==1 %>
+                                        Diesel 
+                                    <% elsif car1.fuel_type==2 %>
+                                        Ethanol
+                                    <% elsif car1.fuel_type==3 %>
+                                        Electric Battery
+                                    <% else %>
+                                        Hydrogen
+                                    <% end %>
+                                </p>
+                            </div>
+                            <div class="col-md-4 col-6 ps-30 my-4">
+                                <p class="text-muted">Condition</p>
+                                <p class="h5 m-0">
+                                    <% if car1.condition==0 %>
+                                        New
+                                    <% else %>
+                                        2nd Hand
+                                    <% end %>
+                                </p>
+                            </div>
+                            <div class="col-md-4 col-6 ps-30 my-4">
+                                <p class="text-muted">Color</p>
+                                <p class="h5 m-0"><%= car1.color %></p>
+                            </div>
+                            <div class="col-md-4 col-6 ps-30 my-4">
+                                <p class="text-muted">Status</p>
+                                <p class="h5 m-0">
+                                <% if car1.status==0 %>
+                                    <div style= "color: green;"> Available</div>
+                                <% else %>
+                                    <div style= "color: #ff0000;"> Sold</div>
+                                <% end %>
+                                </p>
+                            </div>
+
+                            
+                        </div>
+                        <% if car1.status==0 %>
+
+                            <% if current_user.user_type==2 %>
+                                <%= link_to 'Purchase', checkout_path(car1)  %>
+
+                             <% else %>
+                            <%= link_to 'Edit', edit_car_path(car1)  %>
+
+                            <% end %>
+                    
+                        <% end %>
+                </div>
+            </div>
+
+
+
+
+
+
         <% end %>
+
     <% end %>  
 
 

@@ -54,24 +54,12 @@
       </li>
     <% end %>
 
-    <% if logged_in? %>
-    <li class="nav-item">
-    <b><div style="color:white;" class="cent">
-        Hello <% if current_user.user_type==1 %>
-                Seller
-                <% else %>
-                Buyer
-                <% end %>
-                , <%= current_user.name %>
-                </div></b>
-    </li>
-    <% end %>
-
+    
 
     <% if logged_in? %>
     <div class="leftside">
       <li class="nav-item">
-      
+
         <%= link_to "Ordered", ordered_path, class: "nav-link",style: "color: white;"  %> 
       </li>
       </div>
@@ -105,7 +93,7 @@
 </div>
 </nav>
 
-  
+
 
     <% flash.each do |message_type, message| %>
       <% if message_type=="alert" %>
@@ -119,6 +107,21 @@
       <% end %>
 
     <% end %>
+
+
+
+    <% if logged_in? %>
+
+  <b><div class="d-flex align-items-center justify-content-center" >
+      Hello <% if current_user.user_type==1 %>
+                Seller
+            <% else %>
+                Buyer
+            <% end %>
+            , <%= current_user.name %>
+            </div></b>
+<% end %>
+
 
     <%= yield %>
   </body>

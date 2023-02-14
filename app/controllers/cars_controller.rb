@@ -63,9 +63,10 @@ class CarsController < ApplicationController
     def display_ordered
 
         if current_user.user_type==2 
-            @orders=Order.where(user_id: current_user.id)
+            @orders=Order.where(user_id: current_user.id).paginate(page: params[:page],per_page:1)
         else 
-            @seller_cars=Car.where(user_id: current_user.id)
+            @cars=Car.where(user_id: current_user.id)
+            @seller_cars=@cars.where(status:1).paginate(page:params[:page],per_page:1)
         end 
         
 
