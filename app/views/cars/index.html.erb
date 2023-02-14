@@ -31,9 +31,6 @@
   .flickr_pagination .next_page {
     margin-left: 1em; }
 
-    .resol {
-  image-resolution: from-image 300dpi;
-}
 
 
 .embed-responsive .card-img-top {
@@ -42,11 +39,29 @@
 
 </style>
 
+
+
 <% if logged_in? %>
 
 
 
 
+
+<!-- CODE FOR FILTERS  -->
+<% if logged_in? %>
+  <%= form_with(car: :car,method: :get, url: cars_path) do |f| %>
+
+      <div class: "form-group">
+        <%= f.label :fuel_type %><br/>
+        <div class="dd">    <%= f.check_box :public, {}, true, false %>
+        <%= f.select :fuel_type, options_for_select([['Petrol',0], ['diesel', 1], ['Ethanol', 2], ['Electric Battery', 3], ['Hydrogen', 4]]),{include_blank: true},{class: "form-control", :style =>"width:380px", :multiple => true,:size =>10 } %> </div>
+      </div>
+      <div>
+        <%= f.submit "Search", class: "btn btn-primary" %>
+      </div>
+  <% end %>
+
+<% end %>
 
 
 

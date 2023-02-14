@@ -14,9 +14,11 @@
 
 .container {
     margin: 20px auto;
-    max-width: 1000px;
+    max-width: 2000px;
+    height: 1000px;
     background-color: white;
-    padding: 0;
+    padding: 50px;
+    padding-left: 500px;
 }
 
 
@@ -149,40 +151,41 @@ h5,
 
 .mySlides {display:none;}
 
-{
-    width: 30px;  
-    height: 20px;  
-    padding-top: 100px;
 
-
-}
 .b1{
     
 }
 .b2{
  
 }
+.fcc-btn {
+  background-color: black;
+  color: white;
+  padding: 15px 25px;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  text-align: center;
+}
 
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </style>
 
 
 <script>
-var slideIndex = 1;
-showDivs(slideIndex);
+var myIndex = 0;
+carousel();
 
-function plusDivs(n) {
-  showDivs(slideIndex += n);
-}
-
-function showDivs(n) {
+function carousel() {
   var i;
   var x = document.getElementsByClassName("mySlides");
-  if (n > x.length) {slideIndex = 1}
-  if (n < 1) {slideIndex = x.length}
   for (i = 0; i < x.length; i++) {
     x[i].style.display = "none";  
   }
-  x[slideIndex-1].style.display = "block";  
+  myIndex++;
+  if (myIndex > x.length) {myIndex = 1}    
+  x[myIndex-1].style.display = "block";  
+  setTimeout(carousel, 2000); // Change image every 2 seconds
 }
 </script>
 
@@ -195,20 +198,18 @@ function showDivs(n) {
                     <div class="col-12 p-5">
 
                     <% c=1 %>
-                    <% @car.images_as_thumbnails.each do |img| %>
-                    <div class="w3-content w3-display-container">
+                    <% @car.images.each do |img| %>
+                    <div class="w3-content w3-section">
                     <div class="mySlides">
 
-                        <%= link_to image_tag(img, size: "500x500"), img %>
+                        <%= link_to image_tag(img), img %>
                     </div>
 
 
                     </div>
 
                   <% end %>
-                 <button class="w3-button w3-black w3-display-left"  onclick="plusDivs(-1)">&#10094;</button>
-                 <button class="w3-button w3-black w3-display-right"  onclick="plusDivs(1)">&#10095;</button>
-
+                 
 
 
 
@@ -286,17 +287,21 @@ function showDivs(n) {
                             </p>
                         </div>
                     </div>
+
                     <% if @car.status==0 %>
+                        <div class='fcc-btn'>
 
-                        <% if current_user.user_type==2 %>
-                        <%= link_to 'Purchase', checkout_path(@car)  %>
+                            <% if current_user.user_type==2 %>
+                            <%= link_to 'Purchase', checkout_path(@car)  %>
 
-                        <% else %>
-                        <%= link_to 'Edit', edit_car_path(@car)  %>
+                            <% else %>
+                            <%= link_to 'Edit', edit_car_path(@car)  %>
 
-                        <% end %>
-                    
-                    <% end %>
+                            <% end %>
+                        </div>
+
+                        
+                     <% end %>
                 </div>
             </div>
 

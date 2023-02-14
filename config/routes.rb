@@ -20,5 +20,7 @@ Rails.application.routes.draw do
   
   get 'ordered', to: 'cars#display_ordered'
   get 'checkout',to: 'cars#add_to_order'
+
+  get 'search', to: 'cars#search'
   
 end

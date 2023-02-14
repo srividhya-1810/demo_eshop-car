@@ -1,11 +1,16 @@
 class CarsController < ApplicationController
     before_action :require_user
     def index
-        if current_user.user_type==2
-            
-            @cars =Car.all.paginate(page: params[:page], per_page: 8)
+        if params['fuel_type'].blank?
+            if current_user.user_type==2
+                
+                @cars =Car.all.paginate(page: params[:page], per_page: 8)
+            else
+                @cars=Car.where(user_id: current_user.id).paginate(page:params[:page],per_page:8)
+            end
         else
-            @cars=Car.where(user_id: current_user.id).paginate(page:params[:page],per_page:8)
+            @cars=Car.where(fuel_type: params['fuel_type']).paginate(page:params[:page],per_page:8)
+
         end
 
 
@@ -24,7 +29,7 @@ class CarsController < ApplicationController
     end
 
     def create
-       
+        
         @car = Car.new(params.permit(:brand, :price, :car_type, :fuel_type, :condition, :color, :status, images: []))
         
        
@@ -68,13 +73,14 @@ class CarsController < ApplicationController
             @cars=Car.where(user_id: current_user.id)
             @seller_cars=@cars.where(status:1).paginate(page:params[:page],per_page:1)
         end 
-        
-
-
-
-        
-
-        
 
     end
+
+
+    #def search
+   #     byebug
+     #   @car1 = Car.new(params.require(:params).permit( :fuel_type))
+    #    @cars=Car.where(fuel_type: @car1.fuel_type)
+     #   redirect_to cars_path(@cars)
+   # end
 end
