@@ -1,5 +1,5 @@
 class CarsController < ApplicationController
-    #before_action :require_user
+    before_action :require_user
     def index
         if current_user.user_type==2
             

@@ -360,12 +360,12 @@ input[type=text]:placeholder {
 <%= form_for(@car, local: true) do |f| %>
     <div class: "form-group">
     <%= f.label :brand %><br/>
-    <%= f.text_field :brand,class: "form-control-sm  input-sm" , placeholder: "brand" %>
+    <%= f.text_field :brand,class: "form-control-sm  input-sm" , placeholder: "brand",required: true %>
   </div>
   
   <div class: "form-group">
     <%= f.label :price %><br/>
-    <%= f.number_field :price,class: "form-control-sm  input-sm" , placeholder: "price"%>
+    <%= f.number_field :price,class: "form-control-sm  input-sm" , placeholder: "price",required: true %>
   </div>
 
   
@@ -392,14 +392,10 @@ input[type=text]:placeholder {
   
   <div class: "form-group">
     <%= f.label :color %><br/>
-    <%= f.text_field :color,class: "form-control-sm  input-sm" , placeholder: "color" %>
+    <%= f.text_field :color,class: "form-control-sm  input-sm" , placeholder: "color",required: true %>
   </div>
 
   
-  <div class: "form-group">
-    <%= f.label :status %><br/>
-    <div class="dd"><%= f.select :status, options_for_select([['Available', 0], ['Sold', 1]]),{},{class: "form-control", :style =>"width:380px"} %> </div>
-  </div>
 
   
   <div class: "form-group">
