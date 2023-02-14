@@ -43,14 +43,29 @@ class CarsController < ApplicationController
         end
     end
 
+    def length
+
+    end
 
     def update
+        
         @car = Car.find(params[:id])
-        if @car.update(params.require(:car).permit(:brand, :price, :car_type, :fuel_type, :condition, :color, :status, images: []))
-            flash[:notice]="Car updated"
-            redirect_to cars_path
+        @car1=Car.new(params.require(:car).permit(:brand, :price, :car_type, :fuel_type, :condition, :color, :status, images: []))
+        if @car1.images.count==0
+            if @car.update(params.require(:car).permit(:brand, :price, :car_type, :fuel_type, :condition, :color, :status))
+                flash[:notice]="Car updated"
+                redirect_to cars_path
+            else
+                render 'edit', status: 302
+            end
         else
-            render 'edit', status: 302
+            if @car.update(params.require(:car).permit(:brand, :price, :car_type, :fuel_type, :condition, :color, :status, images: []))
+                flash[:notice]="Car updated"
+                redirect_to cars_path
+            else
+                render 'edit', status: 302
+            end
+
         end
     end
     def add_to_order

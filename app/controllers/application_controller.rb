@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
 
     def no_need_to_login
         if current_user.present?
-            redirect_to cars_path
+            return redirect_to cars_path
         end
     end
 

@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+    before_action :no_need_to_login, only: [:index,:new]
     
     def create
          @user=User.new(params.permit(:name, :email,  :address , :phone_number, :user_type, :password))  #add validation
