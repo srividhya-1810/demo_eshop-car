@@ -406,7 +406,7 @@ label{
   
   <div class: "form-group">
     <%= f.label :images %><br/>
-    <%= f.file_field :images, multiple: true %>
+    <%= f.file_field :images, multiple: true ,accept:'image/*',required:true%>
 </div>
     
   <div>

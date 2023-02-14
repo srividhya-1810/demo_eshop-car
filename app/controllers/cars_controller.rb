@@ -75,8 +75,8 @@ class CarsController < ApplicationController
         @order.car_id=params[:format]
         @car_data=Car.find( @order.car_id)
         @car_data.status=1
-        @car_data.save  
         @order.save
+        @car_data.save  
         redirect_to cars_path
     end
 

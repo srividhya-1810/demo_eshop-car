@@ -1,5 +1,7 @@
 class User < ApplicationRecord
     has_many :cars, dependent: :delete_all
+    has_one :order, dependent: :destroy
+
     before_save { self.email = email.downcase }
 
 
