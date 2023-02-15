@@ -51,19 +51,78 @@
 <% if logged_in? %>
   <%= form_with(car: :car,method: :get, url: cars_path) do |f| %>
 
-      <div class: "form-group">
-        <%= f.label :fuel_type %><br/>
-        <div class="dd">    <%= f.check_box :public, {}, true, false %>
-        <%= f.select :fuel_type, options_for_select([['Petrol',0], ['diesel', 1], ['Ethanol', 2], ['Electric Battery', 3], ['Hydrogen', 4]]), {include_blank: true},{:multiple => true, :size =>10 } %> </div>
-      </div>
-      <div>
-        <%= f.submit "Search", class: "btn btn-primary" %>
-      </div>
+        <div class: "form-group">
+            <%= f.label :car_type %><br/>
+            <div class="dd">           
+                <% car_type = Array[0,1,2,3,4,5,6,7,8,9] %>
+                
+                <%= car_type.each do |fu| %>
+                    <%= f.check_box :car_type,{multiple:true} ,fu,false%>
+                    <% if fu==0 %>
+                        <%=f.label :Suv %>
+                    <% elsif fu==1%>
+                        <%= f.label :Hatchback %>
+                    <% elsif fu==2%>
+                        <%= f.label :Crossover %> 
+                    <% elsif fu==3%>
+                        <%= f.label :Convertible %>
+                    <% elsif fu==4%>
+                        <%= f.label :Sedan %>
+                    <% elsif fu==5%>
+                        <%= f.label :Sports %>
+                    <% elsif fu==6%>
+                        <%= f.label :Coupe %>
+                    <% elsif fu==7%>
+                        <%= f.label :Minivan %>
+                    <% elsif fu==8%>
+                        <%= f.label :Wagon %>
+                    <%else %>
+                        <%= f.label :Pick_up_truck %>
+                    <% end %>
+
+                <% end %>
+
+            </div>
+        </div>
+
+        <div class: "form-group">
+            <%= f.label :fuel_type %><br/>
+            <div class="dd">           
+                <% fuel = Array[0,1,2,3,4] %>
+                
+                <%= fuel.each do |fu| %>
+                    <%= f.check_box :fuel_type,{multiple:true} ,fu,false%>
+                    <% if fu==0 %>
+                        <%=f.label :Petrol %>
+                    <% elsif fu==1%>
+                        <%= f.label :Diesel %>
+                    <% elsif fu==2%>
+                        <%= f.label :ethanol %> 
+                    <% elsif fu==3%>
+                        <%= f.label :Electric_Battery %>
+                    <%else %>
+                        <%= f.label :Hydrogen %>
+                    <% end %>
+
+                <% end %>
+
+            </div>
+        </div>
+
+       
+        
+
+
+        <div>
+            <%= f.submit "Search", class: "btn btn-primary" %>
+        </div>
   <% end %>
 
 <% end %>
 
 
+
+<!-- CODE FOR FILTERS ENDS HERE -->
 
 <br/><br/><br/>
 <div class="flickr_pagination">

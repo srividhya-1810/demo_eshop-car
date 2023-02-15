@@ -1,18 +1,24 @@
 class CarsController < ApplicationController
     before_action :require_user
     def index
-        if params['fuel_type'].blank?
-            if current_user.user_type==2
-                
+
+
+        if current_user.user_type==2
+            if params['fuel_type'].blank? and params['car_type'].blank?
                 @cars =Car.all.paginate(page: params[:page], per_page: 8)
+            elsif !params['fuel_type'].blank? and !params['car_type'].blank?
+                @cars=Car.where(car_type:params['car_type'],fuel_type: params['fuel_type']).paginate(page:params[:page],per_page:8)
+            end
+
+        else
+            if params['fuel_type'].blank? and params['car_type'].blank?           
+                @cars=Car.where(user_id: current_user.id).paginate(page:params[:page],per_page:8)
             else
                 @cars=Car.where(user_id: current_user.id).paginate(page:params[:page],per_page:8)
             end
-        else
-            @cars=Car.where(fuel_type: params['fuel_type']).paginate(page:params[:page],per_page:8)
+
 
         end
-
 
     end
 
@@ -25,6 +31,7 @@ class CarsController < ApplicationController
     end
 
     def edit
+        
         @car=Car.find(params[:id])
     end
 
