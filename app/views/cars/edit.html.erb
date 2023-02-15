@@ -9,7 +9,7 @@
  /* BASIC */
 
 html {
-  background-color: #56baed;
+  background-color: black;
 }
 
 body {
@@ -335,7 +335,7 @@ input[type=text]:placeholder {
 
 label{
   font-weight: bold;
-  color: #5F9EA0;
+  color:black;
 
 }
 
@@ -377,8 +377,9 @@ label{
   
   <div class: "form-group">
     <%= f.label :car_type %><br/>
-    
-    <div class="dd"><%= f.select :car_type, options_for_select([['SUV', 0], ['HATCHBACK', 1],['CROSSOVER', 2], ['CONVERTIBLE', 3], ['SEDAN', 4], ['SPORTS', 5], ['COUPE', 6], ['MINIVAN', 7], ['WAGON', 8], ['PICK UP TRUCK', 9]]),{},{class: "form-control", :style =>"width:380px"} %>  </div> 
+
+    <% temp=[0,1,2,3,4,5,6,7,8,9] %>
+    <div class="dd"><%= f.select :car_type, options_for_select([['SUV', 0], ['HATCHBACK', 1],['CROSSOVER', 2], ['CONVERTIBLE', 3], ['SEDAN', 4], ['SPORTS', 5], ['COUPE', 6], ['MINIVAN', 7], ['WAGON', 8], ['PICK UP TRUCK', 9]]),{selected: temp[@car.car_type]},{class: "form-control", :style =>"width:380px"} %>  </div> 
   </div>
 
   

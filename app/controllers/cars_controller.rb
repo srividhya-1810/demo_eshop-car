@@ -27,10 +27,24 @@ class CarsController < ApplicationController
         
 
         else
-            if params['fuel_type'].blank? and params['car_type'].blank?           
+            if params['fuel_type'].blank? and params['car_type'].blank?  and  params['condition'].blank? and params['status'].blank?       
                 @cars=Car.where(user_id: current_user.id).paginate(page:params[:page],per_page:8)
+            elsif !params['fuel_type'].blank? and !params['car_type'].blank? and !params['condition'].blank? and !params['status'].blank?
+                @cars=Car.where(user_id:current_user.id,car_type:params['car_type'],fuel_type: params['fuel_type'],condition: params['condition'],status:params['status']).paginate(page:params[:page],per_page:8)
             else
-                @cars=Car.where(user_id: current_user.id).paginate(page:params[:page],per_page:8)
+                if params['fuel_type'].blank?
+                    params['fuel_type']=[0,1,2,3,4]
+                end
+                if params['car_type'].blank?
+                    params['car_type']=[0,1,2,3,4,5,6,7,8,9]
+                end
+                if params['condition'].blank?
+                    params['condition']=[0,1]
+                end
+                if params['status'].blank?
+                    params['status']=[0,1]
+                end
+                @cars=Car.where(user_id: current_user.id,car_type:params['car_type'],fuel_type: params['fuel_type'],condition: params['condition'],status:params['status']).paginate(page:params[:page],per_page:8)
             end
 
 
@@ -43,12 +57,22 @@ class CarsController < ApplicationController
     end
 
     def new
-        @car=Car.new
+        if current_user.user_type==1
+            @car=Car.new
+        else
+            redirect_to cars_path
+        end
     end
 
     def edit
-        
-        @car=Car.find(params[:id])
+        if current_user.user_type==1 
+            @car=Car.find(params[:id])
+            if @car.user_id!=current_user.id
+                redirect_to cars_path
+            end
+        else
+            redirect_to cars_path
+        end
     end
 
     def create
@@ -56,7 +80,7 @@ class CarsController < ApplicationController
         @car = Car.new(params.permit(:brand, :price, :car_type, :fuel_type, :condition, :color, :status, images: []))
         
        
-        
+        @car.brand=@car.brand.upcase
         @car.user_id= current_user.id  #check here
         if @car.save
             flash[:notice]="Car uploaded"
@@ -75,7 +99,7 @@ class CarsController < ApplicationController
         @car = Car.find(params[:id])
         @car1=Car.new(params.require(:car).permit(:brand, :price, :car_type, :fuel_type, :condition, :color, :status, images: []))
         if @car1.images.count==0
-            if @car.update(params.require(:car).permit(:brand, :price, :car_type, :fuel_type, :condition, :color, :status))
+            if @car.update(params.require(:car).permit(:brand.upcase, :price, :car_type, :fuel_type, :condition, :color, :status))
                 flash[:notice]="Car updated"
                 redirect_to cars_path
             else

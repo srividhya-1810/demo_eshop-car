@@ -1,4 +1,7 @@
 <style>
+h1{
+    text-align:center;
+}
 .flickr_pagination {
   text-align: center;
   padding: 0.3em;
@@ -36,6 +39,12 @@
 .embed-responsive .card-img-top {
     object-fit: cover;
 }
+.center {
+  margin: auto;
+  width: 60%;
+  border: 1px solid black;
+  padding: 10px;
+}
 
 </style>
 
@@ -49,14 +58,16 @@
 
 <!-- CODE FOR FILTERS  -->
 <% if logged_in? %>
+  <div class="center">
   <%= form_with(car: :car,method: :get, url: cars_path) do |f| %>
+    <p> Filter your options </p>
 
         <div class: "form-group">
             <%= f.label :car_type %><br/>
             <div class="dd">           
                 <% car_type = Array[0,1,2,3,4,5,6,7,8,9] %>
                 
-                <%= car_type.each do |fu| %>
+                <% car_type.each do |fu| %>
                     <%= f.check_box :car_type,{multiple:true} ,fu,false%>
                     <% if fu==0 %>
                         <%=f.label :Suv %>
@@ -90,7 +101,7 @@
             <div class="dd">           
                 <% fuel = Array[0,1,2,3,4] %>
                 
-                <%= fuel.each do |fu| %>
+                <% fuel.each do |fu| %>
                     <%= f.check_box :fuel_type,{multiple:true} ,fu,false%>
                     <% if fu==0 %>
                         <%=f.label :Petrol %>
@@ -114,7 +125,7 @@
             <div class="dd">           
                 <% cond = Array[0,1] %>
                 
-                <%= cond.each do |fu| %>
+                <% cond.each do |fu| %>
                     <%= f.check_box :condition,{multiple:true} ,fu,false%>
                     <% if fu==0 %>
                         <%=f.label :New %>
@@ -133,7 +144,7 @@
             <div class="dd">           
                 <% status = Array[0,1] %>
                 
-                <%= status.each do |fu| %>
+                <% status.each do |fu| %>
                     <%= f.check_box :status,{multiple:true} ,fu,false%>
                     <% if fu==0 %>
                         <%=f.label :Available %>
@@ -155,7 +166,7 @@
             <%= f.submit "Search", class: "btn btn-primary" %>
         </div>
   <% end %>
-
+  </div>
 <% end %>
 
 
@@ -172,6 +183,11 @@
 
 <div class="container">
     <div class="row gy-3">
+
+    <%if  @cars.blank? %>
+    
+        <h1> NO cars found </h1>
+    <% end %>
     <% @cars.each do |car| %>
 
         
