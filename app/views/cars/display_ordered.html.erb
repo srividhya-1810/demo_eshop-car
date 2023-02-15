@@ -372,7 +372,7 @@ function carousel() {
 
                         <% c=1 %>
                         <% car1.images.each do |img| %>
-                        <div class="w3-content w3-display-container">
+                        <div class="w3-content w3-section">
                         <div class="mySlides">
 
                             <%= link_to image_tag(img, size: "500x500"), img %>
@@ -382,9 +382,7 @@ function carousel() {
                         </div>
 
                     <% end %>
-                    <button class="w3-button w3-black w3-display-left"  onclick="plusDivs(-1)">&#10094;</button>
-                    <button class="w3-button w3-black w3-display-right"  onclick="plusDivs(1)">&#10095;</button>
-
+                  
 
 
                     

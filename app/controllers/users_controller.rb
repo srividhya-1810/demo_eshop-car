@@ -26,7 +26,11 @@ class UsersController < ApplicationController
 
 
     def edit
-        @user=User.find(params[:id])
+        if current_user.id==params[:id].to_i
+            @user=User.find(params[:id])
+        else
+            redirect_to cars_path
+        end
     end
 
     def update
