@@ -4,11 +4,27 @@ class CarsController < ApplicationController
 
 
         if current_user.user_type==2
-            if params['fuel_type'].blank? and params['car_type'].blank?
+            if params['fuel_type'].blank? and params['car_type'].blank? and params['condition'].blank? and params['status'].blank?
                 @cars =Car.all.paginate(page: params[:page], per_page: 8)
-            elsif !params['fuel_type'].blank? and !params['car_type'].blank?
-                @cars=Car.where(car_type:params['car_type'],fuel_type: params['fuel_type']).paginate(page:params[:page],per_page:8)
+            elsif !params['fuel_type'].blank? and !params['car_type'].blank? and !params['condition'].blank? and !params['status'].blank?
+                @cars=Car.where(car_type:params['car_type'],fuel_type: params['fuel_type'],condition: params['condition'],status:params['status']).paginate(page:params[:page],per_page:8)
+            else
+                if params['fuel_type'].blank?
+                    params['fuel_type']=[0,1,2,3,4]
+                end
+                if params['car_type'].blank?
+                    params['car_type']=[0,1,2,3,4,5,6,7,8,9]
+                end
+                if params['condition'].blank?
+                    params['condition']=[0,1]
+                end
+                if params['status'].blank?
+                    params['status']=[0,1]
+                end
+                @cars=Car.where(car_type:params['car_type'],fuel_type: params['fuel_type'],condition: params['condition'],status:params['status']).paginate(page:params[:page],per_page:8)
+
             end
+        
 
         else
             if params['fuel_type'].blank? and params['car_type'].blank?           

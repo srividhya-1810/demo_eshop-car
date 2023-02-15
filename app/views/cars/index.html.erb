@@ -109,6 +109,44 @@
             </div>
         </div>
 
+        <div class: "form-group">
+            <%= f.label :condition %><br/>
+            <div class="dd">           
+                <% cond = Array[0,1] %>
+                
+                <%= cond.each do |fu| %>
+                    <%= f.check_box :condition,{multiple:true} ,fu,false%>
+                    <% if fu==0 %>
+                        <%=f.label :New %>
+                   
+                    <%else %>
+                        <%= f.label :second_hand %>
+                    <% end %>
+
+                <% end %>
+
+            </div>
+        </div>
+
+        <div class: "form-group">
+            <%= f.label :condition %><br/>
+            <div class="dd">           
+                <% status = Array[0,1] %>
+                
+                <%= status.each do |fu| %>
+                    <%= f.check_box :status,{multiple:true} ,fu,false%>
+                    <% if fu==0 %>
+                        <%=f.label :Available %>
+                   
+                    <%else %>
+                        <%= f.label :Sold %>
+                    <% end %>
+
+                <% end %>
+
+            </div>
+        </div>
+
        
         
 
