@@ -60,10 +60,10 @@ h1{
     
   <%= form_with(car: :car,method: :get, url: cars_path) do |f| %>
     <p> Filter your options </p>
-
         <div class: "form-group">
             <%= f.label :car_type %> <br/>
             <% @filter_options[:car_type].each do |car_type1| %>
+
                 <%= f.check_box :car_type,{multiple:true, checked: car_type1[:checked]} , car_type1[:value], false %>
 
                 <%= f.label car_type1[:label] %>
@@ -98,6 +98,10 @@ h1{
 
                 <%= f.label status1[:label] %>
             <% end %>
+        </div>
+        <div class:"form-group">
+            <p>Sort Price By</p>
+            <%= f.select :price, options_for_select(["select","high to low","low to high"]),{},{class: "form-control", :style =>"width:380px"} %>
         </div>
 
         
@@ -203,11 +207,7 @@ h1{
                 </div>
 
 
-
-
-              
-        
-       
+      
 
             <br/><br/><br/>
 

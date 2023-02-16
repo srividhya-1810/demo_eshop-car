@@ -379,19 +379,19 @@ label{
     <%= f.label :car_type %><br/>
 
     <% temp=[0,1,2,3,4,5,6,7,8,9] %>
-    <div class="dd"><%= f.select :car_type, options_for_select([['SUV', 0], ['HATCHBACK', 1],['CROSSOVER', 2], ['CONVERTIBLE', 3], ['SEDAN', 4], ['SPORTS', 5], ['COUPE', 6], ['MINIVAN', 7], ['WAGON', 8], ['PICK UP TRUCK', 9]]),{selected: temp[@car.car_type]},{class: "form-control", :style =>"width:380px"} %>  </div> 
+    <div class="dd"><%= f.select :car_type, options_for_select([['SUV', 0], ['HATCHBACK', 1],['CROSSOVER', 2], ['CONVERTIBLE', 3], ['SEDAN', 4], ['SPORTS', 5], ['COUPE', 6], ['MINIVAN', 7], ['WAGON', 8], ['PICK UP TRUCK', 9]], selected: @car.car_type), {}, {class: "form-control", :style =>"width:380px" }%>  </div> 
   </div>
 
   
   <div class: "form-group">
     <%= f.label :fuel_type %><br/>
-    <div class="dd"><%= f.select :fuel_type, options_for_select([['Petrol', 0], ['diesel', 1], ['Ethanol', 2], ['Electric Battery', 3], ['Hydrogen', 4]]),{},{class: "form-control", :style =>"width:380px"} %> </div>
+    <div class="dd"><%= f.select :fuel_type, options_for_select([['Petrol', 0], ['Diesel', 1], ['Ethanol', 2], ['Electric Battery', 3], ['Hydrogen', 4]], selected: @car.fuel_type),{},{class: "form-control", :style =>"width:380px"} %> </div>
    </div>
 
    
   <div class: "form-group">
     <%= f.label :condition %><br/>
-    <div class="dd"><%= f.select :condition, options_for_select([['New', 0], ['2nd Hand', 1]]),{},{class: "form-control", :style =>"width:380px"} %></div>
+    <div class="dd"><%= f.select :condition, options_for_select([['New', 0], ['2nd Hand', 1]], selected: @car.condition),{},{class: "form-control", :style =>"width:380px"} %></div>
 
   </div>
 

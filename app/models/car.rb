@@ -21,7 +21,10 @@ class Car < ApplicationRecord
 
         FUEL_TYPE_NAME_MAP = {
             PETROL => "Petrol",
-            DIESEL => "Diesel"
+            DIESEL => "Diesel",
+            ETHANOL => "Ethanol",
+            ELECTRIC_BATTERY => "Electric Battery",
+            HYDROGEN  => "Hydrogen"
         }
 
         def self.all
