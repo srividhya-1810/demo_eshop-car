@@ -39,12 +39,7 @@ h1{
 .embed-responsive .card-img-top {
     object-fit: cover;
 }
-.center {
-  margin: auto;
-  width: 60%;
-  border: 1px solid black;
-  padding: 10px;
-}
+
 
 </style>
 
@@ -58,7 +53,11 @@ h1{
 
 <!-- CODE FOR FILTERS  -->
 <% if logged_in?  && current_user.user_type==2%>
-  <div class="center">
+<div class="card" style="width: 55rem;">
+    <div class="card-body">
+      
+      
+    
   <%= form_with(car: :car,method: :get, url: cars_path) do |f| %>
     <p> Filter your options </p>
 
@@ -108,7 +107,9 @@ h1{
             <%= f.submit "Search", class: "btn btn-primary" %>
         </div>
   <% end %>
-  </div>
+</div>
+</div>
+  
 <% end %>
 
 
@@ -165,49 +166,15 @@ h1{
                             </h5>
                             <p class="card-text"><i>
                                 Car Type:
-                                <% if car.car_type==0 %>
-                                    Suv
-                                <% elsif car.car_type==1 %>
-                                    Hatchback
-                                <% elsif car.car_type==2 %>
-                                    Crossover
-                                <% elsif car.car_type==3 %>
-                                    Covertible 
-                                <% elsif car.car_type==4 %>
-                                    Sedan
-                                <% elsif car.car_type==5 %>
-                                    Sports 
-                                <% elsif car.car_type==6 %>
-                                    Coupe
-                                <% elsif car.car_type==7 %>
-                                    Minivan
-                                <% elsif car.car_type==8 %>
-                                    Wagon
-                                <% else %>
-                                    Pick Up Truck
-                                <% end %>
+                                <%= @filter_options[:car_type][car.car_type][:label] %>
                             </i> </p>
                             <p class="card-text"><i>
                                 Fuel Type: 
-                                <% if car.fuel_type==0 %>
-                                    Petrol
-                                <% elsif car.fuel_type==1 %>
-                                    Diesel 
-                                <% elsif car.fuel_type==2 %>
-                                    Ethanol
-                                <% elsif car.fuel_type==3 %>
-                                    Electric Battery
-                                <% else %>
-                                    Hydrogen
-                                <% end %>
+                                <%= @filter_options[:fuel_type][car.fuel_type][:label] %>
                             </i></p>
                             <p class="card-text"><i>
                                 Condition: 
-                                <% if car.condition==0 %>
-                                    New
-                                <% else %>
-                                    2nd Hand
-                                <% end %>
+                                <%= @filter_options[:condition][car.condition][:label] %>
                             </p></i>
 
                             <p class="card-text"><i>
