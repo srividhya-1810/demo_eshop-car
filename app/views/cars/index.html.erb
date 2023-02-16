@@ -102,16 +102,51 @@ h1{
                 <% fuel = Array[0,1,2,3,4] %>
                 
                 <% fuel.each do |fu| %>
-                    <%= f.check_box :fuel_type,{multiple:true} ,fu,false%>
+                    
                     <% if fu==0 %>
+                        <% if  params[:fuel_type].include? '0' %>
+                            <% val=true %>
+                        <% else %>
+                            <% val=false %>
+                        <% end %>
+                        <%= f.check_box :fuel_type,{multiple:true,checked:val} ,fu,false%>
+
                         <%=f.label :Petrol %>
                     <% elsif fu==1%>
+                    <% if  params[:fuel_type].include? '1' %>
+                            <% val=true %>
+                        <% else %>
+                            <% val=false %>
+                        <% end %>
+                        <%= f.check_box :fuel_type,{multiple:true,checked:val} ,fu,false%>
+
                         <%= f.label :Diesel %>
                     <% elsif fu==2%>
+                    <% if  params[:fuel_type].include? '2' %>
+                            <% val=true %>
+                        <% else %>
+                            <% val=false %>
+                        <% end %>
+                        <%= f.check_box :fuel_type,{multiple:true,checked:val} ,fu,false%>
+
                         <%= f.label :ethanol %> 
                     <% elsif fu==3%>
+                    <% if  params[:fuel_type].include? '3' %>
+                            <% val=true %>
+                        <% else %>
+                            <% val=false %>
+                        <% end %>
+                        <%= f.check_box :fuel_type,{multiple:true,checked:val} ,fu,false%>
+
                         <%= f.label :Electric_Battery %>
                     <%else %>
+                    <% if  params[:fuel_type].include? '4' %>
+                            <% val=true %>
+                        <% else %>
+                            <% val=false %>
+                        <% end %>
+                        <%= f.check_box :fuel_type,{multiple:true,checked:val} ,fu,false%>
+
                         <%= f.label :Hydrogen %>
                     <% end %>
 

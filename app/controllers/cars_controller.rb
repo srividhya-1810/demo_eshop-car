@@ -2,6 +2,21 @@ class CarsController < ApplicationController
     before_action :require_user
     def index
 
+     #   @filter_options = {}
+     #   @filter_options[:fuel_type] = [
+     #       { label: "Petrol", value: Car::FuelType::PETROL, checked: params.dig(:fuel_type).include?(Car::FuelType::PETROL) },
+     #       {}
+     #   ]
+#
+     #   @filter_options[:fuel_type] = Car::FuelType.all.map do |fuel_type|
+     #       { label: Car::FuelType::FUEL_TYPE_NAME_MAP[fuel_type], value: fuel_type, checked: params[:fuel_type].include?(fuel_type)}
+     #   end
+#
+     #   @filter_options[:fuel_type].each do |fuel_type|
+     #       <label>fuel_type[:label]</label>
+     #       <input type="checkbox" value=fuel_type.value checked=fuel_type.checked>
+     #   end
+#
 
         if current_user.user_type==2
             if params['fuel_type'].blank? and params['car_type'].blank? and params['condition'].blank? and params['status'].blank?
