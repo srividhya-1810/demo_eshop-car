@@ -1,23 +1,49 @@
 class CarsController < ApplicationController
     before_action :require_user
+
+    def num_to_bool(x)
+        if x==nil
+            return false
+        else
+            return true
+        end
+    end
     def index
 
-     #   @filter_options = {}
-     #   @filter_options[:fuel_type] = [
-     #       { label: "Petrol", value: Car::FuelType::PETROL, checked: params.dig(:fuel_type).include?(Car::FuelType::PETROL) },
-     #       {}
-     #   ]
-#
-     #   @filter_options[:fuel_type] = Car::FuelType.all.map do |fuel_type|
-     #       { label: Car::FuelType::FUEL_TYPE_NAME_MAP[fuel_type], value: fuel_type, checked: params[:fuel_type].include?(fuel_type)}
-     #   end
-#
-     #   @filter_options[:fuel_type].each do |fuel_type|
-     #       <label>fuel_type[:label]</label>
-     #       <input type="checkbox" value=fuel_type.value checked=fuel_type.checked>
-     #   end
-#
+        @filter_options = {}
+        @filter_options[:fuel_type] = [
+            {  label: "Petrol", value: Car::FuelType::PETROL, checked: num_to_bool(params.dig(:fuel_type,Car::FuelType::PETROL)) },
+            { label: "Diesel", value:Car::FuelType::DIESEL,checked: num_to_bool(params.dig(:fuel_type,Car::FuelType::DIESEL)) },
+            { label: "Ethanol", value:Car::FuelType::ETHANOL,checked: num_to_bool(params.dig(:fuel_type,Car::FuelType::ETHANOL)) },
+            { label: "Electric Battery", value:Car::FuelType::ELECTRIC_BATTERY,checked: num_to_bool(params.dig(:fuel_type,Car::FuelType::ELECTRIC_BATTERY)) },
+            { label: "Hydogen", value:Car::FuelType::HYDROGEN,checked: num_to_bool(params.dig(:fuel_type,Car::FuelType::HYDROGEN)) }
+            
+        ]
 
+        @filter_options[:car_type]=[
+            {label:"Suv",value: Car::CarTypes::SUV,checked: num_to_bool(params.dig(:car_type,Car::CarType::SUV)) },
+            {label:"Hatchback",value: Car::CarTypes::HATCHBACK,checked: num_to_bool(params.dig(:car_type,Car::CarType::HATCHBACK)) },
+            {label:"Convertible",value: Car::CarTypes::CONVERTIBLE,checked: num_to_bool(params.dig(:car_type,Car::CarType::CONVERTIBLE)) },
+            {label:"Suv",value: Car::CarTypes::SUV,checked: num_to_bool(params.dig(:car_type,Car::CarType::SUV)) },
+            {label:"Suv",value: Car::CarTypes::SUV,checked: num_to_bool(params.dig(:car_type,Car::CarType::SUV)) },
+            {label:"Suv",value: Car::CarTypes::SUV,checked: num_to_bool(params.dig(:car_type,Car::CarType::SUV)) },
+            {label:"Suv",value: Car::CarTypes::SUV,checked: num_to_bool(params.dig(:car_type,Car::CarType::SUV)) },
+            {label:"Suv",value: Car::CarTypes::SUV,checked: num_to_bool(params.dig(:car_type,Car::CarType::SUV)) },
+            {label:"Suv",value: Car::CarTypes::SUV,checked: num_to_bool(params.dig(:car_type,Car::CarType::SUV)) },
+            {label:"Suv",value: Car::CarTypes::SUV,checked: num_to_bool(params.dig(:car_type,Car::CarType::SUV)) }
+        ]
+
+#
+      #  @filter_options[:fuel_type] = Car::FuelType.all.map do |fuel_type|
+      #      { label: Car::FuelType::FUEL_TYPE_NAME_MAP[fuel_type], value: fuel_type, checked: params[:fuel_type] == fuel_type}
+      #  end
+#
+      #  @filter_options[:fuel_type].each do |fuel_type|
+      #      <label>fuel_type[label</label>
+      #      <input type="checkbox" value=fuel_type.value checked=fuel_type.checked>
+      #  end
+#
+        
         if current_user.user_type==2
             if params['fuel_type'].blank? and params['car_type'].blank? and params['condition'].blank? and params['status'].blank?
                 @cars =Car.all.paginate(page: params[:page], per_page: 8)
