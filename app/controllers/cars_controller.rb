@@ -9,7 +9,11 @@ class CarsController < ApplicationController
         end
     end
     def index
-
+       
+        if !params['status'].blank?
+            params['status']=[0,1]
+        end
+       
         @filter_options = {}
         @filter_options[:fuel_type] = [
             {  label: "Petrol", value: Car::FuelType::PETROL, checked: num_to_bool(params.dig(:fuel_type,Car::FuelType::PETROL)) },
@@ -21,18 +25,30 @@ class CarsController < ApplicationController
         ]
 
         @filter_options[:car_type]=[
-            {label:"Suv",value: Car::CarTypes::SUV,checked: num_to_bool(params.dig(:car_type,Car::CarType::SUV)) },
-            {label:"Hatchback",value: Car::CarTypes::HATCHBACK,checked: num_to_bool(params.dig(:car_type,Car::CarType::HATCHBACK)) },
-            {label:"Convertible",value: Car::CarTypes::CONVERTIBLE,checked: num_to_bool(params.dig(:car_type,Car::CarType::CONVERTIBLE)) },
-            {label:"Suv",value: Car::CarTypes::SUV,checked: num_to_bool(params.dig(:car_type,Car::CarType::SUV)) },
-            {label:"Suv",value: Car::CarTypes::SUV,checked: num_to_bool(params.dig(:car_type,Car::CarType::SUV)) },
-            {label:"Suv",value: Car::CarTypes::SUV,checked: num_to_bool(params.dig(:car_type,Car::CarType::SUV)) },
-            {label:"Suv",value: Car::CarTypes::SUV,checked: num_to_bool(params.dig(:car_type,Car::CarType::SUV)) },
-            {label:"Suv",value: Car::CarTypes::SUV,checked: num_to_bool(params.dig(:car_type,Car::CarType::SUV)) },
-            {label:"Suv",value: Car::CarTypes::SUV,checked: num_to_bool(params.dig(:car_type,Car::CarType::SUV)) },
-            {label:"Suv",value: Car::CarTypes::SUV,checked: num_to_bool(params.dig(:car_type,Car::CarType::SUV)) }
+            {label:"Suv",value: Car::CarType::SUV,checked: num_to_bool(params.dig(:car_type,Car::CarType::SUV)) },
+            {label:"Hatchback",value: Car::CarType::HATCHBACK,checked: num_to_bool(params.dig(:car_type,Car::CarType::HATCHBACK)) },
+            {label:"Crossover",value: Car::CarType::CROSSOVER,checked: num_to_bool(params.dig(:car_type,Car::CarType::CROSSOVER)) },
+            {label:"Convertible",value: Car::CarType::CONVERTIBLE,checked: num_to_bool(params.dig(:car_type,Car::CarType::CONVERTIBLE)) },
+            {label:"Sedan",value: Car::CarType::SEDAN,checked: num_to_bool(params.dig(:car_type,Car::CarType::SEDAN)) },
+            {label:"Sports",value: Car::CarType::SPORTS,checked: num_to_bool(params.dig(:car_type,Car::CarType::SPORTS)) },
+            {label:"Coupe",value: Car::CarType::COUPE,checked: num_to_bool(params.dig(:car_type,Car::CarType::COUPE)) },
+            {label:"Minivan",value: Car::CarType::MINIVAN,checked: num_to_bool(params.dig(:car_type,Car::CarType::MINIVAN)) },
+            {label:"Wagon",value: Car::CarType::WAGON,checked: num_to_bool(params.dig(:car_type,Car::CarType::WAGON)) },
+            {label:"Pick Up Truck",value: Car::CarType::PICK_UP_TRUCK,checked: num_to_bool(params.dig(:car_type,Car::CarType::PICK_UP_TRUCK)) }
         ]
 
+        @filter_options[:condition]=[
+            {label:"New", value:Car::Condition::NEW,checked:num_to_bool(params.dig(:condition,Car::Condition::NEW))},
+            {label:"Second Hand", value:Car::Condition::SECOND_HAND,checked:num_to_bool(params.dig(:condition,Car::Condition::SECOND_HAND))}
+
+        ]
+
+        @filter_options[:status]=[
+            {label:"Include Sold", value:Car::Status::SOLD,checked:num_to_bool(params.dig(:status,Car::Status::SOLD))}
+
+        ]
+
+        
 #
       #  @filter_options[:fuel_type] = Car::FuelType.all.map do |fuel_type|
       #      { label: Car::FuelType::FUEL_TYPE_NAME_MAP[fuel_type], value: fuel_type, checked: params[:fuel_type] == fuel_type}
@@ -46,23 +62,33 @@ class CarsController < ApplicationController
         
         if current_user.user_type==2
             if params['fuel_type'].blank? and params['car_type'].blank? and params['condition'].blank? and params['status'].blank?
-                @cars =Car.all.paginate(page: params[:page], per_page: 8)
+                @cars =Car.where(status:0).paginate(page: params[:page], per_page: 8)
             elsif !params['fuel_type'].blank? and !params['car_type'].blank? and !params['condition'].blank? and !params['status'].blank?
+                
                 @cars=Car.where(car_type:params['car_type'],fuel_type: params['fuel_type'],condition: params['condition'],status:params['status']).paginate(page:params[:page],per_page:8)
             else
                 if params['fuel_type'].blank?
-                    params['fuel_type']=[0,1,2,3,4]
+                    fu=[0,1,2,3,4]
+                else
+                    fu=params['fuel_type']
                 end
                 if params['car_type'].blank?
-                    params['car_type']=[0,1,2,3,4,5,6,7,8,9]
+                   ca=[0,1,2,3,4,5,6,7,8,9]
+                else
+                    ca=params['car_type']
                 end
                 if params['condition'].blank?
-                    params['condition']=[0,1]
+                    con=[0,1]
+                else
+                    con=params['condition']
                 end
                 if params['status'].blank?
+                    status=[0]
+                else
+                    status=[0,1]
                     params['status']=[0,1]
                 end
-                @cars=Car.where(car_type:params['car_type'],fuel_type: params['fuel_type'],condition: params['condition'],status:params['status']).paginate(page:params[:page],per_page:8)
+                @cars=Car.where(car_type:ca,fuel_type: fu,condition: con,status:status).paginate(page:params[:page],per_page:8)
 
             end
         
@@ -70,21 +96,8 @@ class CarsController < ApplicationController
         else
             if params['fuel_type'].blank? and params['car_type'].blank?  and  params['condition'].blank? and params['status'].blank?       
                 @cars=Car.where(user_id: current_user.id).paginate(page:params[:page],per_page:8)
-            elsif !params['fuel_type'].blank? and !params['car_type'].blank? and !params['condition'].blank? and !params['status'].blank?
-                @cars=Car.where(user_id:current_user.id,car_type:params['car_type'],fuel_type: params['fuel_type'],condition: params['condition'],status:params['status']).paginate(page:params[:page],per_page:8)
             else
-                if params['fuel_type'].blank?
-                    params['fuel_type']=[0,1,2,3,4]
-                end
-                if params['car_type'].blank?
-                    params['car_type']=[0,1,2,3,4,5,6,7,8,9]
-                end
-                if params['condition'].blank?
-                    params['condition']=[0,1]
-                end
-                if params['status'].blank?
-                    params['status']=[0,1]
-                end
+            
                 @cars=Car.where(user_id: current_user.id,car_type:params['car_type'],fuel_type: params['fuel_type'],condition: params['condition'],status:params['status']).paginate(page:params[:page],per_page:8)
             end
 

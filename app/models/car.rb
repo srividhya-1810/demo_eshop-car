@@ -40,15 +40,24 @@ class Car < ApplicationRecord
         MINIVAN=7
         WAGON=8
         PICK_UP_TRUCK=9
+        def self.all
+            [SUV,HATCHBACK,CROSSOVER,CONVERTIBLE,SEDAN,SPORTS,COUPE,MINIVAN,WAGON,PICK_UP_TRUCK]
+        end
     end
 
     module Condition 
         NEW =0
         SECOND_HAND=1
+        def self.all
+            [NEW,SECOND_HAND]
+        end
     end
     module Status
         AVAILABLE=0
         SOLD=1
+        def self.all 
+            [AVAILABLE,SOLD]
+        end
     end
                 
    def images_as_thumbnails

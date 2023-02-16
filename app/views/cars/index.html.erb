@@ -57,13 +57,24 @@ h1{
 
 
 <!-- CODE FOR FILTERS  -->
-<% if logged_in? %>
+<% if logged_in?  && current_user.user_type==2%>
   <div class="center">
   <%= form_with(car: :car,method: :get, url: cars_path) do |f| %>
     <p> Filter your options </p>
 
+        <div class: "form-group">
+            <%= f.label :car_type %> <br/>
+            <% @filter_options[:car_type].each do |car_type1| %>
+                <%= f.check_box :car_type,{multiple:true, checked: car_type1[:checked]} , car_type1[:value], false %>
+
+                <%= f.label car_type1[:label] %>
+            <% end %>
+        </div>
+
        
         <div class: "form-group">
+            <%= f.label :fuel_type %><br/>
+
             <% @filter_options[:fuel_type].each do |fuel_type1| %>
                 <%= f.check_box :fuel_type,{multiple:true, checked: fuel_type1[:checked]} , fuel_type1[:value], false %>
 
@@ -72,25 +83,24 @@ h1{
         </div>
 
         <div class: "form-group">
-            <%= f.label :condition %><br/>
-            <div class="dd">           
-                <% status = Array[0,1] %>
-                
-                <% status.each do |fu| %>
-                    <%= f.check_box :status,{multiple:true} ,fu,false%>
-                    <% if fu==0 %>
-                        <%=f.label :Available %>
-                   
-                    <%else %>
-                        <%= f.label :Sold %>
-                    <% end %>
+            <%= f.label :condition %> <br/>
+            <% @filter_options[:condition].each do |condition1| %>
+                <%= f.check_box :condition,{multiple:true, checked: condition1[:checked]} , condition1[:value], false %>
 
-                <% end %>
-
-            </div>
+                <%= f.label condition1[:label] %>
+            <% end %>
         </div>
 
-       
+      
+        <div class: "form-group">
+            <%= f.label :status %> <br/>
+            <% @filter_options[:status].each do |status1| %>
+                <%= f.check_box :status,{multiple:true, checked: status1[:checked]} , status1[:value], false %>
+
+                <%= f.label status1[:label] %>
+            <% end %>
+        </div>
+
         
 
 
