@@ -184,22 +184,30 @@ h5,
                 <div class="row">
                     <div class="col-12 p-5">
 
-                    <%# c=1 %>
-                    <% @car.images.each do |img| %>
-                        <div class="w3-content w3-section">
-                        <div class="mySlides">
-                        
-                        <%= link_to image_tag(img), img %>
-                        </div>
-                        
-                        
-                        </div>
-                        
-                    <% end #%>
-                        
-
                     
+                        
 
+                    <div id="carouselExampleControls%>" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                      
+                        <% @car.images.each do |image| %>
+                          <div class="carousel-item <%= "active" if image == @car.images.first %>">
+                            <img class="thumb d-block w-100" src= <%= image %>>
+                          </div>
+                        <% end %>
+                    
+                    </div>
+                    <% if @car.images.count > 1 %>
+                      <a class="carousel-control-prev" href="#carouselExampleControls-<%= @car.id %>" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                      </a>
+                      <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                      </a>
+                    <% end %>
+                  </div>
                     
                  
 
