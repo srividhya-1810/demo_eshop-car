@@ -43,7 +43,16 @@ h1{
 
 </style>
 
-
+<script>
+    function myFunction() {
+      var x = document.getElementById("myDIV");
+      if (x.style.display === "none") {
+        x.style.display = "block";
+      } else {
+        x.style.display = "none";
+      }
+    }
+    </script>
 
 <% if logged_in? %>
 
@@ -53,22 +62,28 @@ h1{
 
 <!-- CODE FOR FILTERS  -->
 <% if logged_in?  && current_user.user_type==2%>
-<div class="card" style="width: 55rem;">
-    <div class="card-body">
+
       
       
     
   <%= form_with(car: :car,method: :get, url: cars_path) do |f| %>
     <p> Filter your options </p>
-        <div class: "form-group">
-            <%= f.label :car_type %> <br/>
-            <% @filter_options[:car_type].each do |car_type1| %>
+        
+            
+            <button onclick="toggle(this)">Hide Select</button>
+            <a onclick=" <%= javascript_tag 'myFunction()' %>" " href="#.">Show</a>
 
-                <%= f.check_box :car_type,{multiple:true, checked: car_type1[:checked]} , car_type1[:value], false %>
+            <div id:"myDIV">
+              
+                <%= f.label :car_type %> <br/>
+                <% @filter_options[:car_type].each do |car_type1| %>
 
-                <%= f.label car_type1[:label] %>
-            <% end %>
-        </div>
+                    <%= f.check_box :car_type,{multiple:true, checked: car_type1[:checked]} , car_type1[:value], false %>
+
+                    <%= f.label car_type1[:label] %>
+                <% end %>
+            </div>
+      
 
        
         <div class: "form-group">
@@ -111,8 +126,7 @@ h1{
             <%= f.submit "Search", class: "btn btn-primary" %>
         </div>
   <% end %>
-</div>
-</div>
+
   
 <% end %>
 
