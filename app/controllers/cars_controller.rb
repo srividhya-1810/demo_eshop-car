@@ -137,10 +137,13 @@ class CarsController < ApplicationController
     def edit
         if current_user.user_type==1 
             @car=Car.find(params[:id])
+            
+
             if @car.user_id!=current_user.id
                 redirect_to cars_path
             end
         else
+            flash[:alert]="You dont have rights"
             redirect_to cars_path
         end
     end

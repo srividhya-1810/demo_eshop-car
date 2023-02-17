@@ -29,6 +29,7 @@ class UsersController < ApplicationController
         if current_user.id==params[:id].to_i
             @user=User.find(params[:id])
         else
+            flash[:alert]="You can edit only your account"
             redirect_to cars_path
         end
     end
