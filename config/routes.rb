@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   get 'checkout',to: 'cars#add_to_order'
 
   get 'search', to: 'cars#search'
+  get 'comment',to: 'cars#comment'
   
   
 end

@@ -29,6 +29,10 @@
   right: 1000px;
   top: 0px;
   }
+  .center{
+   
+    font-size: 40px;
+  }
 </style>
   <body>
 
@@ -113,12 +117,12 @@
     <% if logged_in? %>
 
   <b><div class="d-flex align-items-center justify-content-center" >
-      Hello <% if current_user.user_type==1 %>
+     <div class="center"> Hello <% if current_user.user_type==1 %>
                 Seller
             <% else %>
                 Buyer
             <% end %>
-            , <%= current_user.name %>
+            , <%= current_user.name %></div>
             </div></b>
 <% end %>
 

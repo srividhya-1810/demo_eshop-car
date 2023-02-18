@@ -188,6 +188,9 @@ class CarsController < ApplicationController
 
         end
     end
+    def comment
+        
+    end
     def add_to_order
         
         @order=Order.new

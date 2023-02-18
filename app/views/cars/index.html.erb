@@ -1,6 +1,7 @@
 <style>
 h1{
     text-align:center;
+    
 }
 .flickr_pagination {
   text-align: center;
@@ -44,7 +45,13 @@ h1{
     cursor: pointer;
    
 }
-
+.search{
+    margin-left: auto;
+  margin-right: auto;
+}
+.a{
+    text-align: center;
+}
 
 </style>
 
@@ -136,10 +143,16 @@ h1{
       
     
   <%= form_with(car: :car,method: :get, url: cars_path) do |f| %>
-    <p> Filter your options </p>
+  <br/><br/>
+  <div class="a">
+    <p> <b>Filter your options </b></p>
+</div>
         
         <div >
            <div >
+            <table class="search">
+                <tr>
+                    <td  width="30%">
             <span class="reply_toggle_button float-right h6" onclick='toggles()'>
                 <small class="text-primary">Search Car Type</small>
               </span>
@@ -149,33 +162,60 @@ h1{
                     <div id="myselect" hidden="hidden">
                     
                     <%= f.label :car_type %> <br/>
+                    <table>
                     <% @filter_options[:car_type].each do |car_type1| %>
-
+                    <% if car_type1[:label]=="Convertible" || car_type1[:label]=="Coupe" || car_type1[:label]=="Pick Up Truck" %>
+                        <tr>
+                    <% end  %>
+                        <td>
                         <%= f.check_box :car_type,{multiple:true, checked: car_type1[:checked]} , car_type1[:value], false %>
 
                         <%= f.label car_type1[:label] %>
+                        </td>
+                        <% if car_type1[:label]=="Crossover" || car_type1[:label]=="Sports" || car_type1[:label]=="Wagon" %>
+                    </tr>
+                    <% end  %>
                     <% end %>
+                    </table>
                 </div>
             
         </div>
-      
+        </td>
+  
+        
 
+        <td width="30%">
        <div >
             <span class="reply_toggle_button float-right h6" onclick='toggle1()'>
                 <small class="text-primary">Search  Fuel Type</small>
               </span>
-           </div>
+        </div>
         <div id="myselect1" hidden="hidden">
             <%= f.label :fuel_type %><br/>
 
+            <table>
             <% @filter_options[:fuel_type].each do |fuel_type1| %>
+                <% if fuel_type1[:label]=="Electric Battery" %>
+                    <tr>
+                <% end %>
+            
+                <td>
                 <%= f.check_box :fuel_type,{multiple:true, checked: fuel_type1[:checked]} , fuel_type1[:value], false %>
 
                 <%= f.label fuel_type1[:label] %>
+                </td>
+                <% if fuel_type1[:label]=="Ethanol" %>
+            </tr>
+                <% end %>
             <% end %>
+        </table>
+           
         </div>
+    </td>
 
 
+
+    <td width="30%">
         <div >
             <span class="reply_toggle_button float-right h6" onclick='toggle2()'>
                 <small class="text-primary">Search Condition Type</small>
@@ -184,14 +224,20 @@ h1{
         <div id="myselect2" hidden="hidden">
             <%= f.label :condition %> <br/>
             <% @filter_options[:condition].each do |condition1| %>
-                <%= f.check_box :condition,{multiple:true, checked: condition1[:checked]} , condition1[:value], false %>
 
-                <%= f.label condition1[:label] %>
+
+            
+                    <%= f.check_box :condition,{multiple:true, checked: condition1[:checked]} , condition1[:value], false %>
+
+                    <%= f.label condition1[:label] %>
+                
             <% end %>
         </div>
-
+    </td>
+</tr>
+<tr>
       
-
+        <td width="30%">
         <div >
             <span class="reply_toggle_button float-right h6" onclick='toggle3()'>
                 <small class="text-primary">Search Status Type</small>
@@ -205,10 +251,11 @@ h1{
                 <%= f.label status1[:label] %>
             <% end %>
         </div>
+    </td>
 
 
-
-
+    
+        <td width="30%">
         <div >
             <span class="reply_toggle_button float-right h6" onclick='toggle4()'>
 
@@ -218,14 +265,16 @@ h1{
         <div id="myselect4" hidden="hidden">
             <p>Sort Price By</p>
             <%= f.select :price, options_for_select(["select","high to low","low to high"]),{},{class: "form-control", :style =>"width:380px"} %>
-        </div>
-
+        </div></td>
         
-
-
+  
+        <td>
         <div>
             <%= f.submit "Search", class: "btn btn-primary" %>
         </div>
+    </td>
+</tr>
+</table>
   <% end %>
 
   
@@ -315,6 +364,9 @@ h1{
                             
                            
                                 <%=link_to 'view', car_path(car), class:"btn btn-primary" %> 
+                            <% if current_user.user_type==2 %>
+                                <%= link_to 'comment',comment_path, class:"btn btn-primary" %>
+                           <% end %>
                            
                     
                         </div>
