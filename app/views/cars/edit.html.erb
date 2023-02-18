@@ -339,6 +339,11 @@ label{
 
 }
 
+.linkto{
+  color: rgb(14, 78, 141);
+  font-weight: bold;
+  padding-left: 30px;
+}
 </style>
 
 
@@ -352,6 +357,7 @@ label{
   </ul>
 <% end %>
 
+<%= link_to 'Back' , cars_path , class:"linkto"%>
 
 <div class="d-flex align-items-center justify-content-center">
   <h1>Edit Car</h1>

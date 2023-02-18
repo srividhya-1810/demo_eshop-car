@@ -193,28 +193,20 @@ h5,
   .flickr_pagination .next_page {
     margin-left: 1em; }
 
+    .linkto{
+  color: rgb(14, 78, 141);
+  font-weight: bold;
+  padding-left: 30px;
+  text-decoration: none;
+}
+
 </style>
 
 
 
 
-<script>
-var myIndex = 0;
-carousel();
 
-function carousel() {
-  var i;
-  var x = document.getElementsByClassName("mySlides");
-  for (i = 0; i < x.length; i++) {
-    x[i].style.display = "none";  
-  }
-  myIndex++;
-  if (myIndex > x.length) {myIndex = 1}    
-  x[myIndex-1].style.display = "block";  
-  setTimeout(carousel, 2000); // Change image every 2 seconds
-}
-</script>
-
+<%= link_to 'Back' , cars_path , class:"linkto"%>
 <% if current_user.user_type==2 %>
 
     <div class="d-flex align-items-center justify-content-center">
@@ -238,19 +230,29 @@ function carousel() {
                 <div class="row">
                     <div class="col-12 p-5">
 
-                    <% c=1 %>
+                    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
                     <% @car.images.each do |img| %>
-                    <div class="w3-content w3-section">
-                    <div class="mySlides">
-
-                        <%= link_to image_tag(img), img %>
+                    <% if @car.images.first==img %>
+                      <div class="carousel-item active">
+                        <%= image_tag(img,size:"500x500" ) %>
+                      </div>
+                      <% else %>
+                      <div class="carousel-item">
+                        <%= image_tag(img) %>
+                      </div>
+                      <% end %>
+                    <% end %>
                     </div>
-
-
-                    </div>
-
-                  <% end %>
-                
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Next</span>
+                    </button>
+                  </div>
 
 
 
@@ -370,18 +372,7 @@ function carousel() {
                     <div class="row">
                         <div class="col-12 p-5">
 
-                        <% c=1 %>
-                        <% car1.images.each do |img| %>
-                        <div class="w3-content w3-section">
-                        <div class="mySlides">
-
-                            <%= link_to image_tag(img, size: "500x500"), img %>
-                        </div>
-
-
-                        </div>
-
-                    <% end %>
+                       
                   
 
 
@@ -390,6 +381,29 @@ function carousel() {
                     
 
                         <div class="row m-0 bg-light">
+                        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                    <% car1.images.each do |img| %>
+                    <% if car1.images.first==img %>
+                      <div class="carousel-item active">
+                        <%= image_tag(img,size:"500x500" ) %>
+                      </div>
+                      <% else %>
+                      <div class="carousel-item">
+                        <%= image_tag(img) %>
+                      </div>
+                      <% end %>
+                    <% end %>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Next</span>
+                    </button>
+                  </div>
 
 
                             <div class="col-md-4 col-6 ps-30 my-4"></div>
