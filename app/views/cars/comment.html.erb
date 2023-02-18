@@ -1,1 +1,11 @@
+<style>
+    h1{
+        text-align: center;
+        color: blueviolet;
+    }
+</style>
+
 <h1>Comment </h1>
+<% if @order_details.comment.blank? %>
+    <h2> Buyer didn't post a comment </h2>
+<% end %>

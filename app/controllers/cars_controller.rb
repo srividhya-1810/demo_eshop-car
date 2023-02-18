@@ -52,7 +52,7 @@ class CarsController < ApplicationController
         @filter_options[:status]=[
             {label:"Available", value:Car::Status::AVAILABLE,checked: params[:status]&.include?("0")},
 
-            {label:"Include Sold", value:Car::Status::SOLD,checked:params[:status]&.include?("1")}
+            {label:"Sold", value:Car::Status::SOLD,checked:params[:status]&.include?("1")}
 
         ]
 
@@ -111,10 +111,10 @@ class CarsController < ApplicationController
 
         else
             if params['fuel_type'].blank? and params['car_type'].blank?  and  params['condition'].blank? and params['status'].blank?       
-                @cars=Car.where(user_id: current_user.id).paginate(page:params[:page],per_page:8)
+                @cars=Car.where(user_id: current_user.id).order('status').paginate(page:params[:page],per_page:8)
             else
             
-                @cars=Car.where(user_id: current_user.id,car_type:params['car_type'],fuel_type: params['fuel_type'],condition: params['condition'],status:params['status']).paginate(page:params[:page],per_page:8)
+                @cars=Car.where(user_id: current_user.id,car_type:params['car_type'],fuel_type: params['fuel_type'],condition: params['condition'],status:params['status']).order('status').paginate(page:params[:page],per_page:8)
             end
 
 
@@ -189,7 +189,9 @@ class CarsController < ApplicationController
         end
     end
     def comment
-        
+        @order_details=Order.find_by(car_id:params[:format])
+
+
     end
     def add_to_order
         
