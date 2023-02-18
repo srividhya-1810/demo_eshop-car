@@ -123,7 +123,7 @@ class CarsController < ApplicationController
     end
 
     def show
-        
+
         @car=Car.find(params[:id])
     end
 
@@ -157,6 +157,7 @@ class CarsController < ApplicationController
        
         @car.brand=@car.brand.upcase
         @car.user_id= current_user.id  #check here
+        
         if @car.save
             flash[:notice]="Car uploaded"
             redirect_to cars_path
