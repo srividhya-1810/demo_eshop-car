@@ -123,6 +123,7 @@ class CarsController < ApplicationController
     end
 
     def show
+        
         @car=Car.find(params[:id])
     end
 
@@ -140,6 +141,7 @@ class CarsController < ApplicationController
             
 
             if @car.user_id!=current_user.id
+                flash[:alert]="You dont have rights"
                 redirect_to cars_path
             end
         else
@@ -190,9 +192,21 @@ class CarsController < ApplicationController
     end
     def comment
         @order_details=Order.find_by(car_id:params[:format])
+        
 
 
     end
+
+    def add_comment
+     
+        
+        @order_details=Order.find(params[:format])
+        @order_details.comment=params[:order][:comment]
+        @order_details.save
+        flash[:alert]="comments added"
+        redirect_to cars_path
+    end
+    
     def add_to_order
         
         @order=Order.new

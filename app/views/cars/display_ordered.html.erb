@@ -206,7 +206,7 @@ h5,
 
 
 
-<%= link_to 'Back' , cars_path , class:"linkto"%>
+<%= link_to 'Back' , :back , class:"linkto"%>
 <% if current_user.user_type==2 %>
 
     <div class="d-flex align-items-center justify-content-center">
@@ -408,7 +408,7 @@ h5,
 
                             <div class="col-md-4 col-6 ps-30 my-4"></div>
                             <div class="col-md-4 col-6 ps-30 my-4" style="color:#A020F0;">
-                                <p class="text-muted">Brought By</p>
+                                <p class="text-muted">Bought By</p>
                                 <p class="h5 m-0"><% car2=Order.find_by(car_id: car1.id) %>
                                 <% brought_user=User.find(car2.user_id) %>
                                 <b><%= brought_user.name %></b></p>

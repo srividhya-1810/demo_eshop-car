@@ -23,6 +23,8 @@ Rails.application.routes.draw do
 
   get 'search', to: 'cars#search'
   get 'comment',to: 'cars#comment'
+  patch 'add_comment',to: 'cars#add_comment'
+
   
   
 end
