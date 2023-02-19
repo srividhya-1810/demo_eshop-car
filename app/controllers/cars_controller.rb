@@ -192,7 +192,13 @@ class CarsController < ApplicationController
         end
     end
     def comment
-        @order_details=Order.find_by(car_id:params[:format])
+        if current_user.user_type==2
+            @order_details=Order.find_by(car_id:params[:format])
+        else
+            flash[:alert]="You cannot see the comment"
+            redirect_to cars_path
+        end
+        
         
 
 
@@ -217,6 +223,7 @@ class CarsController < ApplicationController
         @car_data.status=1
         @order.save
         @car_data.save  
+        
         redirect_to cars_path
     end
 
