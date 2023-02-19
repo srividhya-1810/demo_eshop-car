@@ -223,7 +223,7 @@ class CarsController < ApplicationController
         @car_data.status=1
         @order.save
         @car_data.save  
-        
+        #PostMailer.with(user:current_user,order:@order).post_created.deliver_now
         redirect_to cars_path
     end
 
