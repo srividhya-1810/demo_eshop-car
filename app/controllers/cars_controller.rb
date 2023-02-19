@@ -139,12 +139,14 @@ class CarsController < ApplicationController
     def show
 
         @car=Car.find(params[:id])
+        
     end
 
     def new
         if current_user.user_type==1
             @car=Car.new
         else
+            flash[:alert]="You dont have permission to create"
             redirect_to cars_path
         end
     end
@@ -237,7 +239,8 @@ class CarsController < ApplicationController
         @car_data.status=1
         @order.save
         @car_data.save  
-        #PostMailer.with(user:current_user,order:@order).post_created.deliver_now
+        PostMailer.with(user:current_user,car:@car_data).post_created.deliver_now
+        flash[:notice]="Car added to order"
         redirect_to cars_path
     end
 

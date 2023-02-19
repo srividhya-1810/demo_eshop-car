@@ -9,9 +9,10 @@ class PostMailer < ApplicationMailer
     @greeting = "Hi"
     @user=params[:user]
     @car=params[:car]
+    
     @send=User.find(@car.user_id)
     mail(
-      from: "car_zone@example.org",
+      from: "car_zone@example.com",
       to:@send.email,
       subject: "Car bought"
     ) 

@@ -2,4 +2,54 @@
 
 <p>
   <%= @greeting %>, find me in app/views/post_mailer/post_created.html.erb
+  <p>You got a new order from <%= @user.name %>!</p>
+    <p>
+    Order details<br>
+    --------------------------
+    </p>
+    <p>Brand: <%= @car.brand %></p>
+      <% if @car.car_type==0 %>
+        <% car_type='Suv' %>
+      <% elsif @car.car_type==1 %>
+        <% car_type='Hatchback' %>
+      <% elsif @car.car_type==2 %>
+        <% car_type='Crossover' %>
+      <% elsif @car.car_type==3 %>
+        <% car_type='Convertible' %>
+      <% elsif @car.car_type==4 %>
+        <% car_type='Sedan' %>
+      <% elsif @car.car_type==5 %>
+        <% car_type='Sports' %>
+      <% elsif @car.car_type==6 %>
+        <% car_type='Coupe' %>
+      <% elsif @car.car_type==7%>
+        <% car_type='Minivan' %>
+      <% elsif @car.car_type==8 %>
+        <% car_type='Wagon' %>
+      <% else %>
+        <% car_type='Pick UP Trruck' %>
+      <% end %>
+    
+    <p>Car Type: <%= car_type%></p>
+    <p>Price: <%= @car.price %></p>
+      <% if @car.fuel_type==0 %>
+          <% fuel_type='Petrol' %>
+      <% elsif @car.fuel_type==1 %>
+          <% fuel_type='Diesel' %>
+      <% elsif @car.fuel_type==2 %>
+          <% fuel_type='Ethanol' %>
+      <% elsif @car.fuel_type==3 %>
+          <% fuel_type='Electric Battery' %>
+      <% else %>
+          <% fuel_type='Hydrogen' %>
+      <% end %>
+
+    <p>FuelType: <%= fuel_type %></p>
+    <p>
+    Buyer Details<br>
+    ----------------------------
+    </p>
+    <p>Name: <%= @user.name %></p>
+    <p>Email: <%= @user.email %></p>
+    <p>Phone Number: <%= @user.phone_number %></p>
 </p>

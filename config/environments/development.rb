@@ -62,20 +62,23 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
 
 
-  config.action_mailer.default_url_options = { host:'localhost', port: '3000' }
+
   config.action_mailer.delivery_method = :smtp
-config.action_mailer.default_url_options = { :host => "my.ip.addr.here" }
-config.action_mailer.smtp_settings = {
-      :address => "smtp.gmail.com",
-      :port => 587,
-      :domain => 'my.ip.addr.here:80',
-      :user_name => "srividhya.venkat1810@gmail.com",
-      :password => "Tree@123",
-      :authentication => :plain,
-      :enable_starttls_auto => true
-}
-
-
+  host = 'example.com' #replace with your own url
+  config.action_mailer.default_url_options = { host: host }
+  
+  # SMTP settings for gmail
+  config.action_mailer.smtp_settings = {
+    :address              => "smtp.gmail.com",
+    :port                 => 587,
+    :user_name            => "srividhya.venkat1810@gmail.com",
+     :password             => "ypwbctwdstlephqf",
+    #:user_name            => "srividhyavenkat18@gmail.com",
+    #:password             => "Redapple@1234",
+    :authentication       => "plain",
+    :enable_starttls_auto => true
+  }
+  
 
 
   # Raises error for missing translations.
