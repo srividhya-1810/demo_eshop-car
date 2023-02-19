@@ -69,8 +69,8 @@ config.action_mailer.smtp_settings = {
       :address => "smtp.gmail.com",
       :port => 587,
       :domain => 'my.ip.addr.here:80',
-      :user_name => "srividhya18.venkat@gmail.com",
-      :password => "srividhya@123",
+      :user_name => "srividhya.venkat1810@gmail.com",
+      :password => "Tree@123",
       :authentication => :plain,
       :enable_starttls_auto => true
 }
