@@ -8,9 +8,8 @@ class PostMailer < ApplicationMailer
   def post_created
     @greeting = "Hi"
     @user=params[:user]
-    @order=params[:order]
-    @to=Car.find(@order.car_id)
-    @send=User.find(@to.user_id)
+    @car=params[:car]
+    @send=User.find(@car.user_id)
     mail(
       from: "car_zone@example.org",
       to:@send.email,

@@ -76,28 +76,42 @@ class CarsController < ApplicationController
                 
                 @cars=Car.where(car_type:params['car_type'],fuel_type: params['fuel_type'],condition: params['condition'],status:params['status']).order('status')
             else
-                searcH_hash = {}
-                if params['fuel_type'].blank?
-                    fu=[0,1,2,3,4]
-                else
-                    fu=params['fuel_type']
+                search_hash = {}
+                #if params['fuel_type'].blank?
+                #    fu=[0,1,2,3,4]
+                #else
+                #    fu=params['fuel_type']
+                #end
+                #if params['car_type'].blank?
+                #   ca=[0,1,2,3,4,5,6,7,8,9]
+                #else
+                #    ca=params['car_type']
+                #end
+                #if params['condition'].blank?
+                #    con=[0,1]
+                #else
+                #    con=params['condition']
+                #end
+                #if params['status'].blank?
+                #    status=[0,1]
+                #else
+                #    status=params[:status]
+                #end
+                
+                if params['fuel_type'].present?
+                    search_hash[:fuel_type]=params['fuel_type']
                 end
-                if params['car_type'].blank?
-                   ca=[0,1,2,3,4,5,6,7,8,9]
-                else
-                    ca=params['car_type']
+                if params['car_type'].present?
+                    search_hash[:car_type]=params['car_type']
                 end
-                if params['condition'].blank?
-                    con=[0,1]
-                else
-                    con=params['condition']
+                if params['condition'].present?
+                    search_hash[:condition]=params['condition']
                 end
-                if params['status'].blank?
-                    status=[0,1]
-                else
-                    status=params[:status]
+                if params['status'].present?
+                    search_hash[:status]=params['status']
                 end
-                @cars=Car.where(car_type:ca,fuel_type: fu,condition: con,status:status).order('status')
+
+                @cars=Car.where(search_hash).order('status')
 
             end
             

@@ -5,9 +5,24 @@
   height:720px
   background-size:cover;
   background-repeat:no-repeat;
-  padding-left: 30px;
+  
 }
 
+.carousel-item{
+  height:60rem;
+  background:#777;
+  position:relative;
+}
+.overlay-image{
+  position:absolute;
+  bottom:0;
+  left:0;
+  right:0;
+  top:0;
+  background-size:cover;
+  background-position:center;
+  
+}
 </style>
       
 
@@ -20,14 +35,19 @@
   <div class="carousel-inner">
   <div class="sizeit">
     <div class="carousel-item active">
-      <%= image_tag("h2.jpg") %>
+      <div class="overlay-image">
+        <%= image_tag("h2.jpg") %>
+      </div>
+     
       <div class="carousel-caption d-none d-md-block">
         <h5>Welcome to Car Zone</h5>
         <p>Sell and Buy</p>
       </div>
     </div>
     <div class="carousel-item">
-     <%= image_tag("new.jpg") %>
+    <div class="overlay-image">
+      <%= image_tag("img.webp") %>
+     </div>
       <div class="carousel-caption d-none d-md-block">
         <h5>Exciting offers</h5>
         
@@ -35,7 +55,9 @@
       </div>
     </div>
     <div class="carousel-item">
-      <%= image_tag("new2.jpg") %>
+    <div class="overlay-image">
+       <%= image_tag("img2.webp") %>
+      </div>
       <div class="carousel-caption d-none d-md-block">
         <h5>New Releases</h5>
         

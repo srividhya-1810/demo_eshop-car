@@ -65,8 +65,13 @@ class Car < ApplicationRecord
                 
    def images_as_thumbnails
     images.map do |img|
-        img.variant(resize_to_limit: [150,150]).processed
+        img.variant(resize_to_limit: [250,250]).processed
 
+    end
+    def images_size
+        images.map do |img|
+            img.size("500x500")
+        end
     end
    end
    validates :brand, 

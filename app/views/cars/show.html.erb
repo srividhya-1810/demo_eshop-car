@@ -7,18 +7,26 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    
 
 }
 
 
-
+.carousel-item{
+    height: 30rem;
+}
 .container {
     margin: 20px auto;
     max-width: 2000px;
     height: 1000px;
     background-color: white;
     padding: 50px;
-    padding-left: 625px;
+   
+   
+  
+    
+    
+    
 }
 
 
@@ -173,11 +181,11 @@ h5,
 
 
 
-<div class="container">
-        <div class="row m-0">
+<div class="container" style="padding-left:30%">
+        <div class="row">
             <div class="col-lg-7 pb-5 pe-lg-5">
-                <div class="row">
-                    <div class="col-12 p-5">
+                <div class="rows">
+                    <div class="col-12 p-8">
 
 
                     
@@ -187,11 +195,11 @@ h5,
                             <% @car.images.each do |img| %>
                             <% if @car.images.first==img %>
                               <div class="carousel-item active">
-                                <%= image_tag(img,size:"500x500" ) %>
+                                <%= image_tag(img,:size => "260x180" ) %>
                               </div>
                               <% else %>
                               <div class="carousel-item">
-                                <%= image_tag(img) %>
+                                <%= image_tag(img,:size => "260x180") %>
                               </div>
                               <% end %>
                             <% end %>
@@ -306,5 +314,8 @@ h5,
                      <% end %>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
 
 
