@@ -239,6 +239,7 @@ class CarsController < ApplicationController
         @car_data.status=1
         @order.save
         @car_data.save  
+        
         PostMailer.with(user:current_user,car:@car_data).post_created.deliver_now
         flash[:notice]="Car added to order"
         redirect_to cars_path

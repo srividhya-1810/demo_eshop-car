@@ -26,7 +26,10 @@ class UsersController < ApplicationController
 
 
     def edit
-        if current_user.id==params[:id].to_i
+        if current_user.blank?
+            flash[:alert]="you cannot edit please login"
+            redirect_to login_path
+        elsif current_user.id==params[:id].to_i
             @user=User.find(params[:id])
         else
             flash[:alert]="You can edit only your account"
