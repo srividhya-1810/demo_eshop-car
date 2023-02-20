@@ -137,8 +137,16 @@ class CarsController < ApplicationController
     end
 
     def show
+        @car_check=Car.find(params[:id])
+        if @car_check.user_id !=current_user.id && current_user.user_type==1
+            flash[:alert] ="You cannot view that car"
+            redirect_to cars_path
 
+        else
+        
         @car=Car.find(params[:id])
+        end
+        
         
     end
 
